@@ -1,0 +1,9 @@
+<div class="dish-list">
+    <div class="dish-panel">
+        <button class="dish-add mat-elevation-z2" mat-flat-button aria-label="Add dish" color="primary" (click)="addDish()">
+            Add dish <mat-icon svgIcon="plus"></mat-icon>
+        </button>
+    </div>
+    <app-dish class="dish-item" *ngFor="let dish of dishes" [dish]="dish"></app-dish>
+</div>
+

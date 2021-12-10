@@ -1,0 +1,99 @@
+<div class="dialog">
+    <h1 mat-dialog-title>Add new dish</h1>
+    <form>
+        <div class="dialog-content" mat-dialog-content fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="50px"
+             fxLayoutGap.lt-sm="0">
+            <!--    <p>What's your favorite animal?</p>-->
+
+            <div class="content-left" fxFlex="50%" fxLayout="row wrap" fxLayoutAlign="space-between"
+                 fxLayout.lt-sm="column">
+                <!-- Name -->
+                <mat-form-field fxFlex="100%" appearance="fill" [hideRequiredMarker]="true">
+                    <mat-label>Name</mat-label>
+                    <input type="text" id="name" matInput [formControl]="formName" required>
+                </mat-form-field>
+
+                <!-- Type       -->
+                <mat-form-field fxFlex="45%" appearance="fill" [hideRequiredMarker]="true">
+                    <mat-label>Type</mat-label>
+                    <input type="text" id="type" matInput [formControl]="formType" [matAutocomplete]="autoType"
+                           required>
+                    <mat-autocomplete #autoType="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredTypes | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <!-- Cuisine        -->
+                <mat-form-field fxFlex="45%" appearance="fill" [hideRequiredMarker]="true">
+                    <mat-label>Cuisine</mat-label>
+                    <input type="text" id="cuisine" matInput [formControl]="formCuisine"
+                           [matAutocomplete]="autoCuisine"
+                           required>
+                    <mat-autocomplete #autoCuisine="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredCuisines | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <!-- Category        -->
+                <mat-form-field fxFlex="100%" appearance="fill" [hideRequiredMarker]="true">
+                    <mat-label>Category</mat-label>
+                    <mat-select [formControl]="formCategory" required>
+                        <mat-option *ngFor="let cat of categories" [value]="cat">{{cat}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- In stock       -->
+                <mat-form-field class="dish-stock" appearance="fill" [hideRequiredMarker]="true">
+                    <mat-label>How many in stock</mat-label>
+                    <input type="number" min="0" step="1" id="inStock" matInput [formControl]="formStock" required>
+                </mat-form-field>
+
+                <!-- Price      -->
+                <mat-form-field class="dish-price" appearance="fill" [hideRequiredMarker]="true">
+                    <mat-label>Price</mat-label>
+                    <input type="number" min="0" id="price" matInput [formControl]="formPrice" required>
+                </mat-form-field>
+            </div>
+            <div class="content-right" fxFlex="50%">
+                <!-- Ingredients    -->
+                <mat-form-field class="dish-ingredients" appearance="fill">
+                    <mat-label>Ingredients</mat-label>
+                    <mat-chip-list #ingredientList aria-label="Fruit selection">
+                        <mat-chip *ngFor="let ingredient of ingredients" (removed)="removeIngredient(ingredient)">
+                            {{ingredient}}
+                            <button matChipRemove>
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip>
+                        <input placeholder="Add ingredient..."
+                               [matChipInputFor]="ingredientList"
+                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                               (matChipInputTokenEnd)="addIngredient($event)">
+                    </mat-chip-list>
+                </mat-form-field>
+
+                <!-- Image        -->
+                <mat-form-field class="dish-img">
+<!--                    <mat-label>File</mat-label>-->
+                <input #imgInput hidden="hidden" type="file" onclick="this.value=null" (change)="imageUploadChange($event)" accept="image/png, image/jpeg">
+                <button class="mat-elevation-z2" mat-flat-button (click)="imgInput.click()">Upload image</button>
+
+                                </mat-form-field>
+
+                <!-- Description      -->
+                <mat-form-field class="dish-desc" appearance="fill" [hideRequiredMarker]="true">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput [formControl]="formDescription" required></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button (click)="close()">No Thanks</button>
+            <button mat-button [mat-dialog-close]="data.animal">Ok</button>
+        </div>
+    </form>
+</div>

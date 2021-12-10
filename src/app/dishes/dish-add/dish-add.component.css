@@ -1,0 +1,47 @@
+/*.content {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: space-around;*/
+/*    column-gap: 50px;*/
+/*}*/
+
+/*.content-left {*/
+/*    width: 600px;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    flex-wrap: wrap;*/
+/*    column-gap: 20px;*/
+/*}*/
+
+/*.dish-name {*/
+/*    flex-basis: 100%;*/
+/*}*/
+
+/*.dish-type, .dish-cuisine, .dish-category, .dish-stock, .d {*/
+/*    flex-basis: 48%;*/
+/*}*/
+
+/*.content-right {*/
+/*    !*width: 100%;*!*/
+/*}*/
+
+.dialog {
+    width: 1000px;
+}
+
+.dialog-content {
+    width: 100%;
+}
+
+.content-left, .content-right {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+/*.dish-desc {*/
+/*    width: 100%;*/
+/*}*/
+

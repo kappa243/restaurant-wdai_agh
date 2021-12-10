@@ -1,0 +1,43 @@
+<mat-card class="dish-item" [ngStyle]="{border: '5px solid ' + getPriceColor()}">
+    <mat-card-header class="dish-info">
+        <mat-card-title class="dish-name">
+            {{dish.name | uppercase}}
+        </mat-card-title>
+        <mat-card-subtitle class="dish-types">
+            {{dish.type}} | {{dish.cuisine | uppercase}} | {{dish.category.toString()}}
+        </mat-card-subtitle>
+
+        <button class="dish-edit mat-elevation-z2" mat-icon-button aria-label="Edit dish" (click)="editDish()">
+            <mat-icon svgIcon="pencil"></mat-icon>
+        </button>
+        <button class="dish-delete mat-elevation-z2" mat-icon-button aria-label="Delete dish" (click)="deleteDish()">
+            <mat-icon svgIcon="delete"></mat-icon>
+        </button>
+    </mat-card-header>
+    <mat-card-content>
+        <img mat-card-image class="dish-img" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Dish image">
+        <div class="dish-price">
+            {{dish.price | currency:'USD'}}
+        </div>
+    </mat-card-content>
+    <mat-card-footer>
+        <div *ngIf="dish.inStock!=0; else ELSEinStock" class="dish-inStock">
+            <p>Available now:</p>
+            <div [ngStyle]="{color: getCountColor()}">{{ dish.inStock - count }}</div>
+        </div>
+        <ng-template #ELSEinStock>
+            <div class="dish-inStock">
+                <p>That dish is not available at this moment.</p>
+            </div>
+        </ng-template>
+        <mat-card-actions *ngIf="dish.inStock!=0" class="dish-order">
+            <button *ngIf="this.count != dish.inStock" class="dish-order-add mat-elevation-z2" mat-icon-button
+                    aria-label="Add to basket" (click)="addOrder()">
+                <mat-icon svgIcon="plus"></mat-icon>
+            </button>
+            <button class="dish--order-remove mat-elevation-z2" mat-icon-button aria-label="Remove from basket" (click)="removeOrder()">
+                <mat-icon svgIcon="minus"></mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card-footer>
+</mat-card>

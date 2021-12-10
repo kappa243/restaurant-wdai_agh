@@ -1,0 +1,14 @@
+.dish-list {
+    margin: 30px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* TODO use angular/flexlayout */
+    column-gap: 50px;
+    row-gap: 50px;
+}
+
+.dish-item {
+    width: 300px;
+    margin: 0 auto;
+}

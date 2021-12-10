@@ -1,0 +1,36 @@
+.dish-item {
+    border: 5px solid #9ff84c;
+    height: 450px;
+}
+
+.dish-price {
+    font-size: 1.8rem;
+}
+
+.dish-order {
+    display: flex;
+    justify-content: center;
+    column-gap: 30px;
+}
+
+.dish-inStock {
+    text-align: center;
+}
+
+.dish-inStock > div {
+    font-size: 1.4rem;
+    outline: 1px black;
+}
+
+
+.dish-delete {
+    color: #f54141;
+}
+
+.dish-order-add {
+    color: #48e361;
+}
+
+.dish-order-remove {
+    color: #f54141;
+}
