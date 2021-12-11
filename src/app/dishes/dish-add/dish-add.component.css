@@ -25,12 +25,23 @@
 /*    !*width: 100%;*!*/
 /*}*/
 
+@media screen and (max-width: 599px) {
+    .dialog {
+        width: 1000px;
+    }
+}
+
 .dialog {
-    width: 1000px;
+    max-width: 1000px;
+    width: auto;
 }
 
 .dialog-content {
     width: 100%;
+}
+
+.dialog-actions {
+    margin-bottom: 1px;
 }
 
 .content-left, .content-right {
@@ -41,7 +52,23 @@ mat-form-field {
     width: 100%;
 }
 
-/*.dish-desc {*/
-/*    width: 100%;*/
-/*}*/
+input.number-arrow-disable::-webkit-outer-spin-button,
+input.number-arrow-disable::-webkit-inner-spin-button,
+input.number-arrow-disable {
+    -moz-appearance: textfield;
+}
 
+.price-right-align {
+    text-align: right;
+}
+
+
+.dish-image {
+    width: 100%;
+    padding-bottom: 18.8125px;
+}
+
+.dish-image > button {
+    width: 100%;
+    height: 100%;
+}

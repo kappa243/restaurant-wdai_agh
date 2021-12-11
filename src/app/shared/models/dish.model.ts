@@ -18,3 +18,8 @@ export enum DishCategory {
     Dessert = 'Dessert',
     Supper = 'Supper'
 }
+
+export interface DishImage {
+    name: string,
+    data: string
+}
