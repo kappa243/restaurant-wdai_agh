@@ -11,6 +11,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatSelectModule} from "@angular/material/select";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
     exports: [
@@ -25,7 +26,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         MatAutocompleteModule,
         MatSelectModule,
         MatChipsModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatMenuModule
     ]
 })
 

@@ -7,10 +7,11 @@ import {MaterialModule} from "../material.module";
 import {DishAddComponent} from './dish-add/dish-add.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {DishesComponent} from "./dishes.component";
 
 
 @NgModule({
-    declarations: [DishComponent, DishesListComponent, DishCurrencyPipe, DishAddComponent],
+    declarations: [DishesComponent, DishComponent, DishesListComponent, DishCurrencyPipe, DishAddComponent],
     imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, FlexLayoutModule]
 })
 

@@ -1,43 +1,74 @@
 <mat-card class="dish-item" [ngStyle]="{border: '5px solid ' + getPriceColor()}">
-    <mat-card-header class="dish-info">
-        <mat-card-title class="dish-name">
-            {{dish.name | uppercase}}
-        </mat-card-title>
-        <mat-card-subtitle class="dish-types">
-            {{dish.type}} | {{dish.cuisine | uppercase}} | {{dish.category.toString()}}
-        </mat-card-subtitle>
 
-        <button class="dish-edit mat-elevation-z2" mat-icon-button aria-label="Edit dish" (click)="editDish()">
-            <mat-icon svgIcon="pencil"></mat-icon>
-        </button>
-        <button class="dish-delete mat-elevation-z2" mat-icon-button aria-label="Delete dish" (click)="deleteDish()">
-            <mat-icon svgIcon="delete"></mat-icon>
-        </button>
-    </mat-card-header>
-    <mat-card-content>
-        <img mat-card-image class="dish-img" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="{{dish.name}}">
-        <div class="dish-price">
-            {{dish.price | currency:'USD'}}
+    <mat-card-content class="dish-content" fxLayout="row">
+        <div class="dish-img">
+            <img src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                 alt="{{dish.name}}">
         </div>
-    </mat-card-content>
-    <mat-card-footer>
-        <div *ngIf="dish.inStock!=0; else ELSEinStock" class="dish-inStock">
-            <p>Available now:</p>
-            <div [ngStyle]="{color: getCountColor()}">{{ dish.inStock - count }}</div>
-        </div>
-        <ng-template #ELSEinStock>
-            <div class="dish-inStock">
-                <p>That dish is not available at this moment.</p>
+        <div class="dish-details" fxLayout="column" fxLayoutAlign="space-between">
+            <div class="dish-header" fxLayout="row" fxLayoutAlign="space-between">
+                <div class="dish-info">
+                    <mat-card-title class="dish-name">
+                        {{dish.name | uppercase}}
+                    </mat-card-title>
+                    <mat-card-subtitle class="dish-types">
+                        {{dish.type}}, {{dish.cuisine | uppercase}} | {{dish.category.toString()}}
+                    </mat-card-subtitle>
+                </div>
+                <div class="dish-options">
+                    <button class="mat-elevation-z2" mat-icon-button [matMenuTriggerFor]="menu"
+                            aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button class="dish-edit" mat-menu-item aria-label="Edit dish" (click)="editDish()">
+                            <mat-icon svgIcon="pencil" ></mat-icon>
+                            <span>Edit dish</span>
+                        </button>
+                        <button class="dish-delete" mat-menu-item aria-label="Delete dish" (click)="deleteDish()">
+                            <mat-icon svgIcon="delete"></mat-icon>
+                            <span>Delete dish</span>
+                        </button>
+                    </mat-menu>
+                </div>
             </div>
-        </ng-template>
-        <mat-card-actions *ngIf="dish.inStock!=0" class="dish-order">
-            <button *ngIf="this.count != dish.inStock" class="dish-order-add mat-elevation-z2" mat-icon-button
-                    aria-label="Add to basket" (click)="addOrder()">
-                <mat-icon svgIcon="plus"></mat-icon>
-            </button>
-            <button class="dish--order-remove mat-elevation-z2" mat-icon-button aria-label="Remove from basket" (click)="removeOrder()">
-                <mat-icon svgIcon="minus"></mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card-footer>
+            <div class="dish-rating">
+                opinion here
+            </div>
+            <div class="dish-footer" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="dish-price">
+                    {{dish.price | currency:'USD'}}
+                </div>
+                <div class="dish-status" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="10px">
+                    <div class="dish-inStock">
+                        <div *ngIf="dish.inStock!=0; else ELSEinStock">
+                            Available now:
+                            <div [ngStyle]="{color: getCountColor()}">{{ dish.inStock - count }}</div>
+                        </div>
+                        <ng-template #ELSEinStock>
+                            That dish is not available at this moment.
+                        </ng-template>
+                    </div>
+                    <div *ngIf="dish.inStock!=0" class="dish-action">
+                        <button [disabled]="this.count == dish.inStock" class="dish-order-add mat-elevation-z2"
+                                mat-icon-button
+                                aria-label="Add to basket" (click)="addOrder()">
+                            <mat-icon svgIcon="plus"></mat-icon>
+                        </button>
+                        <button class="dish-order-remove mat-elevation-z2" mat-icon-button
+                                aria-label="Remove from basket"
+                                (click)="removeOrder()">
+                            <mat-icon svgIcon="minus"></mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </mat-card-content>
+    <!--    <mat-card-footer>-->
+    <!--
+    <!--    </mat-card-footer>-->
 </mat-card>

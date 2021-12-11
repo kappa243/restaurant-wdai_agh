@@ -1,15 +1,7 @@
-<div class="dish-list">
-    <div class="dish-panel">
-        <button class="dish-add mat-elevation-z2" mat-flat-button aria-label="Add dish" color="primary" (click)="addDish()">
-            Add dish <mat-icon svgIcon="plus"></mat-icon>
-        </button>
-    </div>
-    <div class="dish-item" *ngIf="dishMaps | async as dishMaps; else loading">
-        <app-dish *ngFor="let dishMap of dishMaps" [dishMap]="dishMap"></app-dish>
-    </div>
-    <ng-template #loading>
-        <mat-spinner></mat-spinner>
-    </ng-template>
-
+<div class="dishes-list" fxLayout="column" fxLayoutGap="50px"
+     *ngIf="dishMaps | async as dishMaps; else loading">
+    <dishes-dish class="dish-item" *ngFor="let dishMap of dishMaps" [dishMap]="dishMap"></dishes-dish>
 </div>
-
+<ng-template #loading>
+    <mat-spinner></mat-spinner>
+</ng-template>

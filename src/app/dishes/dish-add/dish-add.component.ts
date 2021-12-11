@@ -8,7 +8,7 @@ import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {Dish, DishCategory, DishImage} from "../../shared/models/dish.model";
 
 @Component({
-    selector: 'app-dish-add',
+    selector: 'dishes-add',
     templateUrl: './dish-add.component.html',
     styleUrls: ['./dish-add.component.css']
 })

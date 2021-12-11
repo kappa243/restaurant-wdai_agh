@@ -3,7 +3,7 @@ import {Dish} from "../../shared/models/dish.model";
 import {DishesService, DishMap} from "../dishes.service";
 
 @Component({
-    selector: 'app-dish',
+    selector: 'dishes-dish',
     templateUrl: './dish.component.html',
     styleUrls: ['./dish.component.css']
 })
