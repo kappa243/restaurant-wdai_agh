@@ -1,43 +1,7 @@
-/*.content {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    justify-content: space-around;*/
-/*    column-gap: 50px;*/
-/*}*/
-
-/*.content-left {*/
-/*    width: 600px;*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    flex-wrap: wrap;*/
-/*    column-gap: 20px;*/
-/*}*/
-
-/*.dish-name {*/
-/*    flex-basis: 100%;*/
-/*}*/
-
-/*.dish-type, .dish-cuisine, .dish-category, .dish-stock, .d {*/
-/*    flex-basis: 48%;*/
-/*}*/
-
-/*.content-right {*/
-/*    !*width: 100%;*!*/
-/*}*/
-
-@media screen and (max-width: 599px) {
-    .dialog {
-        width: 1000px;
-    }
-}
-
 .dialog {
     max-width: 1000px;
-    width: auto;
-}
-
-.dialog-content {
     width: 100%;
+    height: 100%;
 }
 
 .dialog-actions {
@@ -65,10 +29,16 @@ input.number-arrow-disable {
 
 .dish-image {
     width: 100%;
-    padding-bottom: 18.8125px;
+    padding-bottom: 19px;
 }
 
 .dish-image > button {
     width: 100%;
     height: 100%;
+}
+
+.loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

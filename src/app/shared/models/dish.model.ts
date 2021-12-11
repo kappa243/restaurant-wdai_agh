@@ -12,8 +12,8 @@ export interface Dish {
 
 
 export enum DishCategory {
-    SideDish = 'Side dish',
     Breakfast = 'Breakfast',
+    SideDish = 'Side dish',
     MainCourse = 'Main course',
     Dessert = 'Dessert',
     Supper = 'Supper'

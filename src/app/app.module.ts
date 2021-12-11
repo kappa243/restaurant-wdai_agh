@@ -4,11 +4,16 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from "./app-routing.module";
 
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from '../environments/environment';
+
+//serivces
+import {DishesService} from "./dishes/dishes.service";
+
 //components
 import {AppComponent} from './app.component';
 import {AlertComponent} from "./shared/dialog/alert/alert.component";
 import {DishesModule} from "./dishes/dishes.module";
-import {DishesService} from "./dishes/dishes.service";
 
 @NgModule({
     declarations: [
@@ -20,7 +25,8 @@ import {DishesService} from "./dishes/dishes.service";
         BrowserModule,
         BrowserAnimationsModule,
         DishesModule,
-        AppRoutingModule
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig)
     ],
     providers: [DishesService],
     bootstrap: [AppComponent]

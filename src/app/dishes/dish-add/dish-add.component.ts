@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DishesService} from "../dishes.service";
+import {DishesService, DishMap} from "../dishes.service";
 import {map, Observable, startWith} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {Dish, DishImage} from "../../shared/models/dish.model";
+import {Dish, DishCategory, DishImage} from "../../shared/models/dish.model";
 
 @Component({
     selector: 'app-dish-add',
@@ -13,6 +13,9 @@ import {Dish, DishImage} from "../../shared/models/dish.model";
     styleUrls: ['./dish-add.component.css']
 })
 export class DishAddComponent implements OnInit {
+    dishMap!: Observable<DishMap[]>;
+    dishes: Dish[] = [];
+
     types: string[] = [];
     filteredTypes?: Observable<string[]>;
 
@@ -36,33 +39,45 @@ export class DishAddComponent implements OnInit {
         category: new FormControl('', Validators.required),
         stock: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]),
         price: new FormControl('', [Validators.required, Validators.min(0)]),
-        image: new FormControl('', Validators.required),
+        image: new FormControl(),
         ingredients: new FormControl(''),
         description: new FormControl('', Validators.required)
     });
 
     constructor(private dishesService: DishesService,
                 public dialogRef: MatDialogRef<DishAddComponent>,
-                @Inject(MAT_DIALOG_DATA) public data: DialogData
-    ) {
+                @Inject(MAT_DIALOG_DATA) public data: Observable<DishMap[]>) {
+        this.dishMap = data;
     }
 
     ngOnInit(): void {
         // this.dialogRef.updateSize('auto')
+        this.dishMap.subscribe(dishMap => {
+            this.dishes = dishMap.map(dishMap => dishMap.dish)
 
-        this.types = this.dishesService.getTypes();
-        this.filteredTypes = this.formGroup.controls['type'].valueChanges.pipe(
-            startWith(''),
-            map(type => (type ? this.filterString(type, this.types) : this.types))
-        )
 
-        this.cuisines = this.dishesService.getCuisines();
-        this.filteredCuisines = this.formGroup.controls['cuisine'].valueChanges.pipe(
-            startWith(''),
-            map(cuisine => (cuisine ? this.filterString(cuisine, this.cuisines) : this.cuisines))
-        )
+            let types = new Set<string>();
+            this.dishes.forEach(dish => {
+                types.add(dish.type)
+            })
+            this.types = Array.from(types);
+            this.filteredTypes = this.formGroup.controls['type'].valueChanges.pipe(
+                startWith(''),
+                map(type => (type ? this.filterString(type, this.types) : this.types))
+            )
 
-        this.categories = this.dishesService.getCategories();
+            let cuisines = new Set<string>();
+            this.dishes.forEach(dish => {
+                cuisines.add(dish.cuisine)
+            })
+            this.cuisines = Array.from(cuisines);
+            this.filteredCuisines = this.formGroup.controls['cuisine'].valueChanges.pipe(
+                startWith(''),
+                map(cuisine => (cuisine ? this.filterString(cuisine, this.cuisines) : this.cuisines))
+            )
+
+            this.categories = Object.values(DishCategory);
+        })
     }
 
     addIngredient(event: MatChipInputEvent) {
@@ -127,7 +142,7 @@ export class DishAddComponent implements OnInit {
     //     })
     // }
 
-    test(e: any){
+    test(e: any) {
 
     }
 
@@ -145,7 +160,7 @@ export class DishAddComponent implements OnInit {
                 type: values.type,
                 cuisine: values.cuisine,
                 category: values.category,
-                ingredients: [],
+                ingredients: Array.from(this.ingredients),
                 inStock: values.stock,
                 price: values.price,
                 description: values.description,
@@ -153,7 +168,7 @@ export class DishAddComponent implements OnInit {
             }
 
             this.dishesService.addDish(dish)
-            console.log(this.dishesService.getDishes())
+            // console.log(this.dishesService.getDishes())
         }
         console.log(this.formGroup.value);  // { first: '', last: '' }
         console.log(this.formGroup.valid);  // false
@@ -170,9 +185,3 @@ export class DishAddComponent implements OnInit {
 
 
 }
-
-export interface DialogData {
-    animal: string;
-    name: string;
-}
-

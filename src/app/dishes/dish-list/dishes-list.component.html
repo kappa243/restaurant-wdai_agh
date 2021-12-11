@@ -4,6 +4,12 @@
             Add dish <mat-icon svgIcon="plus"></mat-icon>
         </button>
     </div>
-    <app-dish class="dish-item" *ngFor="let dish of dishes" [dish]="dish"></app-dish>
+    <div class="dish-item" *ngIf="dishMaps | async as dishMaps; else loading">
+        <app-dish *ngFor="let dishMap of dishMaps" [dishMap]="dishMap"></app-dish>
+    </div>
+    <ng-template #loading>
+        <mat-spinner></mat-spinner>
+    </ng-template>
+
 </div>
 

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Dish} from "../../shared/models/dish.model";
-import {DishesService} from "../dishes.service";
+import {DishesService, DishMap} from "../dishes.service";
 
 @Component({
     selector: 'app-dish',
@@ -8,7 +8,8 @@ import {DishesService} from "../dishes.service";
     styleUrls: ['./dish.component.css']
 })
 export class DishComponent implements OnInit {
-    @Input() dish!: Dish;
+    @Input() dishMap!: DishMap;
+    dish!: Dish;
 
     @Output() orderEvent = new EventEmitter<boolean>();
 
@@ -18,6 +19,7 @@ export class DishComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.dish = this.dishMap.dish;
     }
 
 
@@ -41,7 +43,7 @@ export class DishComponent implements OnInit {
     }
 
     deleteDish() {
-        this.dishesService.removeDish(this.dish);
+        this.dishesService.removeDish(this.dishMap.key);
     }
 
     getCountColor(): string {
