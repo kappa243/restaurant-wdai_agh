@@ -20,45 +20,19 @@ export class DishesService {
     }
 
     addDish(dish: Dish) {
-        this.dataRef.push(dish);
+        return this.dataRef.push(dish);
     }
 
     getDishes() {
         return this.dishes;
     }
 
-    // getTypes() {
-    //     let types = new Set<string>();
-    //     return this.dishes.forEach(dishMap => {
-    //         dishMap.filter(dish => {
-    //             types.add(dish.dish.type)
-    //         })
-    //     }).then(r => types);
-    //     // return Array.from(types);
-    // }
-    //
-    // getCuisines(): string[] {
-    //     let cuisines = new Set<string>();
-    //     this.dishes.forEach(dishMap => {
-    //         dishMap.filter(dish => {
-    //             cuisines.add(dish.dish.cuisine)
-    //         })
-    //     });
-    //     return Array.from(cuisines);
-    // }
-    //
-    // getCategories(): string[] {
-    //     return Object.values(DishCategory);
-    // }
+    updateDish(key: string, dish: Dish){
+        return this.dataRef.set(key, dish);
+    }
 
     removeDish(key: string) {
-        this.dataRef.remove(key);
-
-        // console.log(Object.values(DishCategory));
-        // console.log(this.getCategories());
-        // console.log(this.dishes.filter(el => el !== dish));
-        // this.dishes = this.dishes.filter(el => el !== dish);
-        // this.dishesChanged.emit(this.dishes);
+        return this.dataRef.remove(key);
     }
 }
 

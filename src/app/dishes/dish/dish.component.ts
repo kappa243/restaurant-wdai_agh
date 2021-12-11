@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Dish} from "../../shared/models/dish.model";
 import {DishesService, DishMap} from "../dishes.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'dishes-dish',
@@ -15,11 +16,12 @@ export class DishComponent implements OnInit {
 
     count: number = 0;
 
-    constructor(private dishesService: DishesService) {
+    constructor(private dishesService: DishesService, private snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
         this.dish = this.dishMap.dish;
+        console.log(this.dishMap)
     }
 
 
@@ -43,7 +45,12 @@ export class DishComponent implements OnInit {
     }
 
     deleteDish() {
-        this.dishesService.removeDish(this.dishMap.key);
+        this.dishesService.removeDish(this.dishMap.key).then(() => {
+            this.snackBar.open("Dish successfully delete", undefined, {
+                duration: 3000
+            })
+        })
+
     }
 
     getCountColor(): string {

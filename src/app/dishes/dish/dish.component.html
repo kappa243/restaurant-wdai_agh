@@ -22,7 +22,7 @@
                     </button>
                     <mat-menu #menu="matMenu">
                         <button class="dish-edit" mat-menu-item aria-label="Edit dish" (click)="editDish()">
-                            <mat-icon svgIcon="pencil" ></mat-icon>
+                            <mat-icon svgIcon="pencil"></mat-icon>
                             <span>Edit dish</span>
                         </button>
                         <button class="dish-delete" mat-menu-item aria-label="Delete dish" (click)="deleteDish()">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="dish-rating">
-                opinion here
+                <app-dish-rate [dishMap]="dishMap"></app-dish-rate>
             </div>
             <div class="dish-footer" fxLayout="row" fxLayoutAlign="space-between center">
                 <div class="dish-price">
@@ -68,7 +68,4 @@
 
 
     </mat-card-content>
-    <!--    <mat-card-footer>-->
-    <!--
-    <!--    </mat-card-footer>-->
 </mat-card>

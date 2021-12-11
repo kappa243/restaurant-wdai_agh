@@ -1,0 +1,8 @@
+<div class="dish-rating mat-elevation-z2" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+    <div class="star" (click)="selectStar(star)" *ngFor="let star of stars" fxLayout="column" fxLayoutAlign="center">
+        <mat-icon *ngIf="selectedStars[star-1]; else outlineStar" svgIcon="star"></mat-icon>
+        <ng-template #outlineStar>
+            <mat-icon svgIcon="star-outline"></mat-icon>
+        </ng-template>
+    </div>
+</div>

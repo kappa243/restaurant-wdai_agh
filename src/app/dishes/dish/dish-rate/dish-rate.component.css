@@ -1,0 +1,16 @@
+.dish-rating {
+    padding: 5px;
+    border-radius: 20px;
+    width: 150px;
+}
+
+.star {
+    color: #efbf22;
+    cursor: pointer;
+    transform: rotate(0);
+    transition: .3s ease-out;
+}
+
+.star:hover {
+    transform: rotate(144deg);
+}

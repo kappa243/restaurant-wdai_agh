@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {v4 as uuidv4} from "uuid"
 
 @Component({
     selector: 'app-root',
@@ -8,18 +9,11 @@ import {Component} from '@angular/core';
 export class AppComponent {
     title = 'restaurant';
 
-    // constructor(private dbService: DishesDatabaseService) {
-    //     this.dbService.dishes.subscribe(pdish =>{
-    //         this.dishes = pdish;
-    //     })
-    // }
-    //
-    // add(){
-    //     this.dbService.test();
-    // }
-    //
-    // dishes: any;
-    // add2(){
-    //       console.log(this.dishes)
-    // }
+    localStorage = window.localStorage;
+
+    constructor() {
+        // temporary session generating
+        const sessionID = uuidv4().toString();
+        this.localStorage.setItem('sessionID',sessionID)
+    }
 }

@@ -1,6 +1,5 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DishesService, DishMap} from "../dishes.service";
-import {DishAddComponent} from "../dish-add/dish-add.component";
 import {Observable} from "rxjs";
 
 @Component({

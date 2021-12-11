@@ -6,6 +6,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {Dish, DishCategory, DishImage} from "../../shared/models/dish.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'dishes-add',
@@ -45,6 +46,7 @@ export class DishAddComponent implements OnInit {
     });
 
     constructor(private dishesService: DishesService,
+                private snackBar: MatSnackBar,
                 public dialogRef: MatDialogRef<DishAddComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: Observable<DishMap[]>) {
         this.dishMap = data;
@@ -164,14 +166,16 @@ export class DishAddComponent implements OnInit {
                 inStock: values.stock,
                 price: values.price,
                 description: values.description,
-                imgs: []
+                imgs: [],
+                rates: []
             }
 
-            this.dishesService.addDish(dish)
-            // console.log(this.dishesService.getDishes())
+            this.dishesService.addDish(dish).then(() => {
+                this.snackBar.open("Dish successfully created", undefined, {
+                    duration: 3000
+                })
+            })
         }
-        console.log(this.formGroup.value);  // { first: '', last: '' }
-        console.log(this.formGroup.valid);  // false
     }
 
     close() {

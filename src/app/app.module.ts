@@ -12,13 +12,11 @@ import {DishesService} from "./dishes/dishes.service";
 
 //components
 import {AppComponent} from './app.component';
-import {AlertComponent} from "./shared/dialog/alert/alert.component";
 import {DishesModule} from "./dishes/dishes.module";
 
 @NgModule({
     declarations: [
-        AppComponent,
-        AlertComponent
+        AppComponent
     ],
     imports: [
         HttpClientModule,
