@@ -167,7 +167,7 @@ export class DishAddComponent implements OnInit {
                 price: values.price,
                 description: values.description,
                 imgs: [],
-                rates: []
+                ratings: []
             }
 
             this.dishesService.addDish(dish).then(() => {

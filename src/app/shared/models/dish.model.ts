@@ -8,7 +8,7 @@ export interface Dish {
     price: number,
     description: string,
     imgs: string[],
-    rates: DishRate[] | undefined
+    ratings: DishRating[] | undefined
 }
 
 
@@ -25,7 +25,7 @@ export interface DishImage {
     data: string
 }
 
-export interface DishRate {
+export interface DishRating {
     user: string,
-    rate: number
+    rating: number
 }

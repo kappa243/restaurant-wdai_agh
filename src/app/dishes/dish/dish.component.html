@@ -17,7 +17,7 @@
                 </div>
                 <div class="dish-options">
                     <button class="mat-elevation-z2" mat-icon-button [matMenuTriggerFor]="menu"
-                            aria-label="Example icon-button with a menu">
+                            aria-label="Dish options">
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
@@ -32,9 +32,7 @@
                     </mat-menu>
                 </div>
             </div>
-            <div class="dish-rating">
-                <app-dish-rate [dishMap]="dishMap"></app-dish-rate>
-            </div>
+            <dish-rating class="dish-rating" [dishMap]="dishMap"></dish-rating>
             <div class="dish-footer" fxLayout="row" fxLayoutAlign="space-between center">
                 <div class="dish-price">
                     {{dish.price | currency:'USD'}}
