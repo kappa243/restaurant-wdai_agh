@@ -7,7 +7,7 @@ export interface Dish {
     inStock: number,
     price: number,
     description: string,
-    img: string,
+    imgs: string[],
     ratings: DishRating[] | undefined
 }
 

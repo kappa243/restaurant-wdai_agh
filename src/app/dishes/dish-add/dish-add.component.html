@@ -65,7 +65,7 @@
 
 
                     <!-- Price      -->
-                    <mat-form-field class="dish-price" fxFlex="45%" appearance="fill" floatLabel="always"
+                    <mat-form-field class="dish-price" fxFlex="100%" appearance="fill" floatLabel="always"
                                     [hideRequiredMarker]="true">
                         <mat-label>Price</mat-label>
                         <input class="number-arrow-disable price-right-align" type="number" min="0" id="price"
@@ -77,20 +77,31 @@
                         <mat-error *ngIf="hasError('price', 'min')">Positive number is required</mat-error>
                     </mat-form-field>
 
-                    <!-- Image        -->
-                    <mat-form-field class="dish-image" fxFlex="45%" fxFlex.lt-sm="100%" appearance="fill"
-                                    [hideRequiredMarker]="true">
-                        <mat-label>Image link</mat-label>
-                        <input type="text" id="image" name="image" formControlName="image" matInput>
-                        <mat-error *ngIf="hasError('image', 'required')">Image link is required</mat-error>
-                    </mat-form-field>
-
                 </div>
                 <div class="content-right" fxFlex="50%">
+                    <!-- Image        -->
+                    <mat-form-field class="dish-image" appearance="fill" [hideRequiredMarker]="true">
+                        <mat-label>Images links</mat-label>
+                        <mat-chip-list formControlName="images" #imageList aria-label="Images">
+                            <mat-chip *ngFor="let image of images" (removed)="removeImage(image)">
+                                {{image}}
+                                <button matChipRemove>
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip>
+                            <input placeholder="Add image link..."
+                                   formControlName="images"
+                                   [matChipInputFor]="imageList"
+                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                   (matChipInputTokenEnd)="addImage($event)">
+                        </mat-chip-list>
+                        <mat-error *ngIf="hasError('images', 'required')">Image link is required</mat-error>
+                    </mat-form-field>
+
                     <!-- Ingredients    -->
                     <mat-form-field class="dish-ingredients" appearance="fill">
                         <mat-label>Ingredients</mat-label>
-                        <mat-chip-list formControlName="ingredients" #ingredientList aria-label="Fruit selection">
+                        <mat-chip-list formControlName="ingredients" #ingredientList aria-label="Ingredients">
                             <mat-chip *ngFor="let ingredient of ingredients" (removed)="removeIngredient(ingredient)">
                                 {{ingredient}}
                                 <button matChipRemove>

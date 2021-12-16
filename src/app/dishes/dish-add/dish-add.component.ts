@@ -26,6 +26,7 @@ export class DishAddComponent implements OnInit {
     categories: string[] = [];
 
     ingredients: Set<string> = new Set();
+    images: Set<string> = new Set();
 
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
@@ -38,7 +39,7 @@ export class DishAddComponent implements OnInit {
         category: new FormControl('', Validators.required),
         stock: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]),
         price: new FormControl('', [Validators.required, Validators.min(0)]),
-        image: new FormControl('', Validators.required),
+        images: new FormControl('', Validators.required),
         ingredients: new FormControl(''),
         description: new FormControl('', Validators.required)
     });
@@ -94,6 +95,20 @@ export class DishAddComponent implements OnInit {
         this.ingredients.delete(ingredient);
     }
 
+    addImage(event: MatChipInputEvent) {
+        const image = (event.value || '').trim();
+
+        if (image) {
+            this.images.add(image);
+        }
+
+        event.chipInput!.clear();
+    }
+
+    removeImage(image: string) {
+        this.images.delete(image);
+    }
+
 
     public hasError = (controlName: string, errorName: string) => {
         return this.formGroup.controls[controlName].hasError(errorName);
@@ -113,7 +128,7 @@ export class DishAddComponent implements OnInit {
                 inStock: values.stock,
                 price: values.price,
                 description: values.description,
-                img: values.image,
+                imgs: Array.from(this.images),
                 ratings: []
             }
 
