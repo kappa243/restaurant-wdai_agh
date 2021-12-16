@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Dish} from "../../shared/models/dish.model";
 import {DishesService, DishMap} from "../dishes.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {CartService} from "../../cart/cart.service";
 
 @Component({
     selector: 'dishes-dish',
@@ -16,7 +17,7 @@ export class DishComponent implements OnInit {
 
     count: number = 0;
 
-    constructor(private dishesService: DishesService, private snackBar: MatSnackBar) {
+    constructor(private dishesService: DishesService, private cartService: CartService, private snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
@@ -30,6 +31,8 @@ export class DishComponent implements OnInit {
             this.count++;
             this.orderEvent.emit(true);
         }
+
+        this.cartService.addToBasket(this.dish);
     }
 
 
@@ -38,6 +41,7 @@ export class DishComponent implements OnInit {
             this.count--;
             this.orderEvent.emit(false);
         }
+        this.cartService.removeFromBasket(this.dish);
     }
 
     editDish() {

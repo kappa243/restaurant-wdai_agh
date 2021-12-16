@@ -10,6 +10,7 @@ import {AppComponent} from './app.component';
 import {DishesModule} from "./dishes/dishes.module";
 import {HeaderComponent} from './core/header/header.component';
 import {MaterialModule} from "./material.module";
+import {CartModule} from "./cart/cart.module";
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import {MaterialModule} from "./material.module";
         DishesModule,
         MaterialModule,
         AppRoutingModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig)
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        CartModule
     ],
     providers: [DishesService],
     bootstrap: [AppComponent]
