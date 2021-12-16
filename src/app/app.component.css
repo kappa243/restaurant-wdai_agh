@@ -10,6 +10,10 @@ router-outlet {
 }
 
 
+mat-drawer {
+    padding: 20px;
+}
+
 mat-drawer-container {
     position: absolute;
     top:0;

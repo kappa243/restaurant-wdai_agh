@@ -1,10 +1,9 @@
-<div class="dishes-panel">
-    <button class="dish-add mat-elevation-z2" mat-flat-button aria-label="Add dish" color="primary" (click)="addDish()">
-        Add dish
+<div class="dishes">
+    <div class="dishes-list">
+        <dishes-list></dishes-list>
+    </div>
+
+    <button class="dish-add mat-elevation-z2" mat-fab aria-label="Add dish" color="primary" (click)="addDish()">
         <mat-icon svgIcon="plus"></mat-icon>
     </button>
-</div>
-
-<div class="dishes-list">
-    <dishes-list></dishes-list>
 </div>

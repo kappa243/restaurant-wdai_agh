@@ -5,7 +5,7 @@ import {map, Observable, startWith} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {Dish, DishCategory, DishImage} from "../../shared/models/dish.model";
+import {Dish, DishCategory} from "../../shared/models/dish.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -25,8 +25,6 @@ export class DishAddComponent implements OnInit {
 
     categories: string[] = [];
 
-    imgs: DishImage[] = [];
-
     ingredients: Set<string> = new Set();
 
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -40,7 +38,7 @@ export class DishAddComponent implements OnInit {
         category: new FormControl('', Validators.required),
         stock: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0)]),
         price: new FormControl('', [Validators.required, Validators.min(0)]),
-        image: new FormControl(),
+        image: new FormControl('', Validators.required),
         ingredients: new FormControl(''),
         description: new FormControl('', Validators.required)
     });
@@ -96,57 +94,6 @@ export class DishAddComponent implements OnInit {
         this.ingredients.delete(ingredient);
     }
 
-    imageUploadChange(event: any) {
-        // TODO image upload using dishes service (firebase)
-        // const file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
-        // const reader = new FileReader();
-        //
-        // let ffdf: Partial<IFileSaveDto>
-        // reader.readAsDataURL(file);
-        // reader.onload = () => {
-        //     this.formGroup.get('img')
-        // }
-        //
-        //
-        // console.log(fileInputEvent.target.files[0]);
-    }
-
-    // async onImageChange(event: any) {
-    //     let files = [].slice.call(event.target.files);
-    //
-    //     let stored: Promise<DishImage>[] = [];
-    //
-    //     if (files && files[0]) {
-    //         for (let file of files) {
-    //             const data: Promise<DishImage> = await this.readFileAsync(file);
-    //             stored.push(await data);
-    //         }
-    //     }
-    //     return this.imgs;
-    // }
-    //
-    //
-    // private async readFileAsync(file: any) {
-    //     return new Promise((resolve, reject) => {
-    //         let reader = new FileReader();
-    //
-    //         reader.onload = () => {
-    //             const base64: string = <string>reader.result;
-    //             let dishImage: DishImage = {
-    //                 name: file.name,
-    //                 data: base64
-    //             }
-    //             resolve(dishImage);
-    //         };
-    //
-    //         reader.onerror = reject;
-    //         reader.readAsDataURL(file);
-    //     })
-    // }
-
-    test(e: any) {
-
-    }
 
     public hasError = (controlName: string, errorName: string) => {
         return this.formGroup.controls[controlName].hasError(errorName);
@@ -166,7 +113,7 @@ export class DishAddComponent implements OnInit {
                 inStock: values.stock,
                 price: values.price,
                 description: values.description,
-                imgs: [],
+                img: values.image,
                 ratings: []
             }
 

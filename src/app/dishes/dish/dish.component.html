@@ -1,11 +1,11 @@
 <mat-card class="dish-item" [ngStyle]="{border: '5px solid ' + getPriceColor()}">
 
-    <mat-card-content class="dish-content" fxLayout="row">
+    <mat-card-content class="dish-content" fxLayout="row" fxLayout.lt-md="column">
         <div class="dish-img">
-            <img src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            <img src="{{dish.img}}"
                  alt="{{dish.name}}">
         </div>
-        <div class="dish-details" fxLayout="column" fxLayoutAlign="space-between">
+        <div class="dish-details" fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap.lt-sm="15px">
             <div class="dish-header" fxLayout="row" fxLayoutAlign="space-between">
                 <div class="dish-info">
                     <mat-card-title class="dish-name">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <dish-rating class="dish-rating" [dishMap]="dishMap"></dish-rating>
-            <div class="dish-footer" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="dish-footer" fxLayout="row" fxLayoutAlign="space-between center" fxLayout.lt-sm="column" fxLayoutGap="5px">
                 <div class="dish-price">
                     {{dish.price | currency:'USD'}}
                 </div>
@@ -63,7 +63,5 @@
             </div>
 
         </div>
-
-
     </mat-card-content>
 </mat-card>

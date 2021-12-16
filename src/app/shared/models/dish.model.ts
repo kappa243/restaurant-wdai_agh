@@ -7,7 +7,7 @@ export interface Dish {
     inStock: number,
     price: number,
     description: string,
-    imgs: string[],
+    img: string,
     ratings: DishRating[] | undefined
 }
 
@@ -20,10 +20,6 @@ export enum DishCategory {
     Supper = 'Supper'
 }
 
-export interface DishImage {
-    name: string,
-    data: string
-}
 
 export interface DishRating {
     user: string,

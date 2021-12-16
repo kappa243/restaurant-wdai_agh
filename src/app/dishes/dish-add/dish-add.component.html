@@ -46,7 +46,7 @@
                     <!-- Category        -->
                     <mat-form-field class="dish-category" fxFlex="100%" appearance="fill" [hideRequiredMarker]="true">
                         <mat-label>Category</mat-label>
-                        <mat-select id="category" name="category" formControlName="category">
+                        <mat-select id="category" formControlName="category">
                             <mat-option *ngFor="let cat of categories" [value]="cat">{{cat}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="hasError('category', 'required')">Category is required</mat-error>
@@ -72,23 +72,18 @@
                                name="price"
                                formControlName="price" matInput>
                         <span matPrefix>$&nbsp;</span>
-                        <span matSuffix>.00</span>
+<!--                        <span matSuffix>.00</span>-->
                         <mat-error *ngIf="hasError('price', 'required')">Price is required</mat-error>
                         <mat-error *ngIf="hasError('price', 'min')">Positive number is required</mat-error>
                     </mat-form-field>
 
                     <!-- Image        -->
-                    <div class="dish-image mat-form-field-flex" fxFlex="45%">
-                        <input formControlName="image" #imgInput hidden="hidden" type="file" multiple
-                               (change)="test($event)"
-
-                               accept="image/png, image/jpeg">
-                        <!--                           onclick="this.value=null"  (change)="imageUploadChange($event)"-->
-                        <button type="button" class="mat-elevation-z2" mat-flat-button (click)="imgInput.click()">Upload
-                            image
-                        </button>
-                        <mat-error *ngIf="hasError('image', 'required')">Image is required</mat-error>
-                    </div>
+                    <mat-form-field class="dish-image" fxFlex="45%" fxFlex.lt-sm="100%" appearance="fill"
+                                    [hideRequiredMarker]="true">
+                        <mat-label>Image link</mat-label>
+                        <input type="text" id="image" name="image" formControlName="image" matInput>
+                        <mat-error *ngIf="hasError('image', 'required')">Image link is required</mat-error>
+                    </mat-form-field>
 
                 </div>
                 <div class="content-right" fxFlex="50%">
@@ -112,8 +107,7 @@
                     <!-- Description      -->
                     <mat-form-field class="dish-desc" appearance="fill" [hideRequiredMarker]="true">
                         <mat-label>Description</mat-label>
-                        <textarea matInput name="description" formControlName="description" cdkTextareaAutosize
-                                  cdkAutosizeMinRows="15"></textarea>
+                        <textarea matInput name="description" formControlName="description"></textarea>
                         <mat-error *ngIf="hasError('description', 'required')">Description is required</mat-error>
                     </mat-form-field>
                 </div>
