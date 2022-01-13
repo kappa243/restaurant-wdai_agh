@@ -10,11 +10,12 @@ import {DishesComponent} from "./dishes.component";
 import {DishRatingComponent} from "./dish/dish-rate/dish-rating.component";
 import {DishViewComponent} from './dish-view/dish-view.component';
 import {RouterModule} from "@angular/router";
+import {MatCarouselModule} from "@ngbmodule/material-carousel";
 
 
 @NgModule({
     declarations: [DishesComponent, DishComponent, DishesListComponent, DishAddComponent, DishRatingComponent, DishViewComponent],
-    imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, FlexLayoutModule, RouterModule]
+    imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, FlexLayoutModule, RouterModule, MatCarouselModule]
 })
 
 export class DishesModule {

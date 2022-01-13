@@ -5,11 +5,27 @@
         <mat-card class="dish" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
 
             <!-- TODO gallery -->
-            <div class="dish-img">
-                <img src="{{dish.imgs[0]}}"
-                     alt="{{dish.name}}">
-            </div>
-
+            <mat-carousel class="dish-gallery"
+                [timings]="'500ms ease-in-out'"
+                [autoplay]="true"
+                [interval]="3000"
+                [loop]="true"
+                [hideArrows]="false"
+                [hideIndicators]="true"
+                [color]="'accent'"
+                [maxWidth]="'100%'"
+                [useMouseWheel]="true"
+                [proportion]="45"
+                [slides]="this.dish.imgs.length"
+                [maintainAspectRatio]="true"
+            >
+                <mat-carousel-slide
+                    *ngFor="let img of dish.imgs"
+                    [hideOverlay]="true"
+                    [image]="img"
+                >
+                </mat-carousel-slide>
+            </mat-carousel>
 
             <div class="dish-name">
                 {{dish.name | uppercase}}
