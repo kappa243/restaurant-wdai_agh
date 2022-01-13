@@ -11,11 +11,14 @@ import {DishesModule} from "./dishes/dishes.module";
 import {HeaderComponent} from './core/header/header.component';
 import {MaterialModule} from "./material.module";
 import {CartModule} from "./cart/cart.module";
+import { HomeComponent } from './core/home/home.component';
+import {ExtendedModule, FlexModule} from "@angular/flex-layout";
 
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent
+        HeaderComponent,
+        HomeComponent
     ],
     imports: [
         HttpClientModule,
@@ -25,7 +28,9 @@ import {CartModule} from "./cart/cart.module";
         MaterialModule,
         AppRoutingModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
-        CartModule
+        CartModule,
+        FlexModule,
+        ExtendedModule
     ],
     providers: [DishesService],
     bootstrap: [AppComponent]

@@ -22,7 +22,11 @@ export class DishComponent implements OnInit {
 
     ngOnInit(): void {
         this.dish = this.dishMap.dish;
-        console.log(this.dishMap)
+        let basketItem = this.cartService.getBasketItems().find(dish => JSON.stringify(dish.dish) == JSON.stringify(this.dish));
+
+        if (basketItem != undefined) {
+            this.count = basketItem.count;
+        }
     }
 
 

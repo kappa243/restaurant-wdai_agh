@@ -1,0 +1,22 @@
+<div *ngIf="basketItems.length>0; else empty">
+<div class="cart-products" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30px">
+
+        <mat-card [matBadge]="product.count" class="cart-product" *ngFor="let product of basketItems" fxLayout="row"
+                  fxLayoutAlign="space-between center">
+            <div fxLayout="row" fxLayoutGap="10px">
+                <div class="product-price">{{product.dish.price * product.count | currency:'USD'}} </div>
+                <div class="product-name">{{product.dish.name | uppercase}}</div>
+            </div>
+            <div fxLayout="row">
+                <button class="product-basket-remove mat-elevation-z2" mat-icon-button
+                        aria-label="Remove from basket"
+                        (click)="removeFromBasket(product.dish)">
+                    <mat-icon svgIcon="minus"></mat-icon>
+                </button>
+            </div>
+        </mat-card>
+</div>
+</div>
+<ng-template #empty>
+    <div id="empty-cart">It looks like your cart is empty :(</div>
+</ng-template>

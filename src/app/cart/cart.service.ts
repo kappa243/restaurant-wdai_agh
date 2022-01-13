@@ -43,4 +43,8 @@ export class CartService {
         }
     }
 
+    getBasketItems(){
+        return this.basketItems;
+    }
+
 }

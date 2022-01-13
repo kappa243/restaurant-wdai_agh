@@ -9,6 +9,7 @@ import {MatDrawer} from "@angular/material/sidenav";
 export class HeaderComponent implements OnInit {
 
     @Input() drawerButton!: MatDrawer;
+    @Input() routing!: { name: string, path: string }[]
 
     constructor() {
     }
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    openSideNav(){
+    openSideNav() {
         this.drawerButton.toggle();
     }
 }

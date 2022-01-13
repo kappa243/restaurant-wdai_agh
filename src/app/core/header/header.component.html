@@ -1,8 +1,13 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button class="menu-button" aria-label="Menu" (click)="openSideNav()">
+<mat-toolbar class="header" color="primary">
+    <button mat-icon-button class="menu-button" aria-label="Menu" (click)="openSideNav()" fxShow="false" fxShow.lt-sm="true">
         <mat-icon>menu</mat-icon>
     </button>
-    <span>Restaurant</span>
+    <span id="home" routerLink="">Restaurant</span>
+
+    <div class="routing" fxShow="true" fxShow.lt-sm="false">
+        <button mat-flat-button routerLink="dishes" *ngFor="let route of routing">{{route.name}}</button>
+    </div>
+
     <span class="spacer"></span>
     <cart-status></cart-status>
 </mat-toolbar>

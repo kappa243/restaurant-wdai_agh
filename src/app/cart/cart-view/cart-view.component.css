@@ -1,0 +1,45 @@
+.cart-products {
+    margin: 30px;
+}
+
+.cart-product {
+    width: 600px;
+    height: auto;
+}
+
+.product-name {
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.product-price {
+    font-size: 1.3rem;
+    font-weight: bolder;
+}
+
+.product-quantity {
+    font-size: 1.2rem;
+    line-height: 100%;
+}
+
+.product-basket-remove {
+    color: #f54141;
+}
+
+#empty-cart {
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 959px){
+    .cart-product {
+        width: 400px;
+    }
+
+    .product-price {
+        font-size: 1rem;
+    }
+
+    .product-name {
+        font-size: 1rem;
+    }
+}
