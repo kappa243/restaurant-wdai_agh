@@ -1,4 +1,4 @@
-import {Dish, DishCategory} from "../shared/models/dish.model";
+import {Dish} from "../shared/models/dish.model";
 import {Injectable} from "@angular/core";
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/compat/database";
 import {map, Observable} from "rxjs";
@@ -27,7 +27,7 @@ export class DishesService {
         return this.dishes;
     }
 
-    updateDish(key: string, dish: Dish){
+    updateDish(key: string, dish: Dish) {
         return this.dataRef.set(key, dish);
     }
 

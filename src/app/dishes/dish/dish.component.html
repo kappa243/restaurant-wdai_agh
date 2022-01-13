@@ -1,7 +1,7 @@
 <mat-card class="dish-item" [ngStyle]="{border: '5px solid ' + getPriceColor()}">
 
     <mat-card-content class="dish-content" fxLayout="row" fxLayout.lt-md="column">
-        <div class="dish-img">
+        <div class="dish-img" routerLink="/dishes/{{dishMap.key}}">
             <img src="{{dish.imgs[0]}}"
                  alt="{{dish.name}}">
         </div>

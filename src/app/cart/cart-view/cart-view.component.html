@@ -1,5 +1,5 @@
 <div *ngIf="basketItems.length>0; else empty">
-<div class="cart-products" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30px">
+    <div class="cart-products" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30px">
 
         <mat-card [matBadge]="product.count" class="cart-product" *ngFor="let product of basketItems" fxLayout="row"
                   fxLayoutAlign="space-between center">
@@ -15,7 +15,7 @@
                 </button>
             </div>
         </mat-card>
-</div>
+    </div>
 </div>
 <ng-template #empty>
     <div id="empty-cart">It looks like your cart is empty :(</div>

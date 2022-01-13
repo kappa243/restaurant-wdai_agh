@@ -30,8 +30,6 @@ export class DishAddComponent implements OnInit {
 
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-    formDescription = new FormControl();
-
     formGroup = new FormGroup({
         name: new FormControl('', Validators.required),
         type: new FormControl('', Validators.required),

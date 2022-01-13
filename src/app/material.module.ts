@@ -15,6 +15,8 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
     exports: [
@@ -33,7 +35,13 @@ import {MatSidenavModule} from "@angular/material/sidenav";
         MatMenuModule,
         MatSnackBarModule,
         MatToolbarModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatDatepickerModule,
+        MatNativeDateModule
+    ],
+    providers: [
+        MatDatepickerModule,
+        {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'}
     ]
 })
 

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Dish} from "../../shared/models/dish.model";
 import {DishesService, DishMap} from "../dishes.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -13,7 +13,6 @@ export class DishComponent implements OnInit {
     @Input() dishMap!: DishMap;
     dish!: Dish;
 
-    @Output() orderEvent = new EventEmitter<boolean>();
 
     count: number = 0;
 
@@ -33,7 +32,6 @@ export class DishComponent implements OnInit {
     addOrder() {
         if (this.count < this.dish.inStock) {
             this.count++;
-            this.orderEvent.emit(true);
         }
 
         this.cartService.addToBasket(this.dish);
@@ -43,7 +41,6 @@ export class DishComponent implements OnInit {
     removeOrder() {
         if (this.count > 0) {
             this.count--;
-            this.orderEvent.emit(false);
         }
         this.cartService.removeFromBasket(this.dish);
     }

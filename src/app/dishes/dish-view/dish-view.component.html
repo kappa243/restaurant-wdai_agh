@@ -1,1 +1,135 @@
-<p>dish-view works!</p>
+<div *ngIf="dish">
+
+    <div class="dish-content" fxLayout="column" fxLayoutAlign="start center">
+
+        <mat-card class="dish" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+
+            <!-- TODO gallery -->
+            <div class="dish-img">
+                <img src="{{dish.imgs[0]}}"
+                     alt="{{dish.name}}">
+            </div>
+
+
+            <div class="dish-name">
+                {{dish.name | uppercase}}
+            </div>
+            <div class="dish-properties" fxLayout="row" fxLayoutGap="5px">
+                <div class="dish-category">
+                    {{dish.category}}
+                </div>
+                <span>|</span>
+                <div class="dish-cuisine">
+                    {{dish.cuisine}}
+                </div>
+                <span>|</span>
+                <div class="dish-type">
+                    {{dish.type}}
+                </div>
+            </div>
+
+
+            <hr style="width: 100%">
+
+            <p class="dish-description">
+                {{dish.description}}
+            </p>
+
+            <div style="width: 100%;" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="dish-price">
+                    {{dish.price | currency:'USD'}}
+                </div>
+
+                <dish-rating class="dish-rating" [dishMap]="dishMap"></dish-rating>
+            </div>
+
+            <div *ngIf="dish.inStock!=0" class="dish-action" fxLayout="row" fxLayoutGap="10px">
+                <button [disabled]="this.count == dish.inStock" class="dish-order-add mat-elevation-z2"
+                        mat-icon-button
+                        aria-label="Add to basket" (click)="addOrder()">
+                    <mat-icon svgIcon="plus"></mat-icon>
+                </button>
+                <button class="dish-order-remove mat-elevation-z2" mat-icon-button
+                        aria-label="Remove from basket"
+                        (click)="removeOrder()">
+                    <mat-icon svgIcon="minus"></mat-icon>
+                </button>
+            </div>
+
+            <hr style="width: 100%">
+
+
+            <div class="dish-create-comment">
+                <mat-card>
+                    <mat-card-title>
+                        Comment dish
+                    </mat-card-title>
+                    <mat-card-content>
+                        <form [formGroup]="formGroup" #formDirective="ngForm" autocomplete="off" novalidate
+                              (ngSubmit)="onSubmit(formDirective)" fxLayout="column" fxLayoutGap="8px">
+                            <div fxLayout="row" fxLayoutGap="15px" fxLayout.lt-md="column">
+                                <mat-form-field class="input-title" fxFlex="100%" fxFlex.lt-sm="100%" appearance="fill"
+                                                [hideRequiredMarker]="true">
+                                    <mat-label>Title</mat-label>
+                                    <input type="text" id="title" name="title" formControlName="title" matInput>
+                                    <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="input-nick" fxFlex="100%" fxFlex.lt-sm="100%" appearance="fill"
+                                                [hideRequiredMarker]="true">
+                                    <mat-label>Nickname</mat-label>
+                                    <input type="text" id="nick" name="nick" formControlName="nick" matInput>
+                                    <mat-error *ngIf="hasError('nick', 'required')">Nickname is required</mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="input-date" fxFlex="100%" fxFlex.lt-sm="100%" appearance="fill"
+                                                [hideRequiredMarker]="true">
+                                    <mat-label>Choose a purchase date</mat-label>
+                                    <input id="date" name="date" formControlName="date" matInput
+                                           [matDatepicker]="picker">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+
+                            </div>
+                            <mat-form-field class="input-text" appearance="fill" [hideRequiredMarker]="true">
+                                <mat-label>Text</mat-label>
+                                <textarea matInput name="text" formControlName="text" minlength="50"
+                                          maxlength="500"></textarea>
+                                <mat-error *ngIf="hasError('text', 'required')">Comment text is required</mat-error>
+                            </mat-form-field>
+                            <button type="submit" mat-raised-button color="primary" [disabled]="!formGroup.valid">Add
+                                comment
+                            </button>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+
+            <div class="dish-comments">
+                <mat-card class="comment-item mat-elevation-z2" *ngFor="let comment of comments">
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <div class="comment-title">
+                            {{comment.title}}
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="15px">
+                            <div class="comment-nick" fxLayoutAlign="start center">
+                                <mat-icon svgIcon="account-circle"></mat-icon>
+                                {{comment.nick}}
+                            </div>
+                            <div class="comment-date" fxLayoutAlign="start center" *ngIf="comment.purchase_date">
+                                <mat-icon svgIcon="cart-variant"></mat-icon>
+                                {{comment.purchase_date | date: 'dd/MM/YYYY'}}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="comment-text">
+                        {{comment.text}}
+                    </p>
+                </mat-card>
+            </div>
+
+        </mat-card>
+    </div>
+</div>
