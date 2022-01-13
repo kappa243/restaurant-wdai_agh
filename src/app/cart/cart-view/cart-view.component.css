@@ -27,7 +27,10 @@
 }
 
 #empty-cart {
+    margin: 30px;
     font-size: 2rem;
+    text-align: center;
+    line-height: 100%;
 }
 
 @media screen and (max-width: 959px){
