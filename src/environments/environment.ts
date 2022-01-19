@@ -6,21 +6,21 @@ export const environment = {
     production: false,
     firebaseConfig: {
 
-        apiKey: "AIzaSyAfrmy5gVqDeuPkttszR8vDknMktJDVZjM",
+        apiKey: "AIzaSyCoBKbMxhUE2UChAlr3cbpz-SP3Dd5G6GQ",
 
-        authDomain: "restaurant-wdai2.firebaseapp.com",
+        authDomain: "restaurant-wdai3.firebaseapp.com",
 
-        databaseURL: "https://restaurant-wdai2-default-rtdb.europe-west1.firebasedatabase.app",
+        databaseURL: "https://restaurant-wdai3-default-rtdb.europe-west1.firebasedatabase.app",
 
-        projectId: "restaurant-wdai2",
+        projectId: "restaurant-wdai3",
 
-        storageBucket: "restaurant-wdai2.appspot.com",
+        storageBucket: "restaurant-wdai3.appspot.com",
 
-        messagingSenderId: "375798430249",
+        messagingSenderId: "731316504415",
 
-        appId: "1:375798430249:web:d89701fe43c15cda867a38",
+        appId: "1:731316504415:web:a520c58b1c839cc111d8ea",
 
-        measurementId: "G-3W5T5KLJ2D"
+        measurementId: "G-TC5JR63VP4"
 
     }
 };

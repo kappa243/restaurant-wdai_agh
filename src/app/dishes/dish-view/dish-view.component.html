@@ -6,17 +6,17 @@
 
             <!-- TODO gallery -->
             <mat-carousel class="dish-gallery"
-                [timings]="'500ms ease-in-out'"
-                [autoplay]="true"
-                [interval]="3000"
-                [loop]="true"
-                [hideArrows]="false"
-                [hideIndicators]="true"
-                [color]="'accent'"
-                [maxWidth]="'100%'"
-                [proportion]="45"
-                [slides]="this.dish.imgs.length"
-                [maintainAspectRatio]="true"
+                          [timings]="'500ms ease-in-out'"
+                          [autoplay]="true"
+                          [interval]="3000"
+                          [loop]="true"
+                          [hideArrows]="false"
+                          [hideIndicators]="true"
+                          [color]="'accent'"
+                          [maxWidth]="'100%'"
+                          [proportion]="45"
+                          [slides]="this.dish.imgs.length"
+                          [maintainAspectRatio]="true"
             >
                 <mat-carousel-slide
                     *ngFor="let img of dish.imgs"
@@ -58,17 +58,28 @@
                 <dish-rating class="dish-rating" [dishMap]="dishMap"></dish-rating>
             </div>
 
-            <div *ngIf="dish.inStock!=0" class="dish-action" fxLayout="row" fxLayoutGap="10px">
-                <button [disabled]="this.count == dish.inStock" class="dish-order-add mat-elevation-z2"
-                        mat-icon-button
-                        aria-label="Add to basket" (click)="addOrder()">
-                    <mat-icon svgIcon="plus"></mat-icon>
-                </button>
-                <button class="dish-order-remove mat-elevation-z2" mat-icon-button
-                        aria-label="Remove from basket"
-                        (click)="removeOrder()">
-                    <mat-icon svgIcon="minus"></mat-icon>
-                </button>
+            <div style="width: 100%;" fxLayout="row" fxLayoutGap="10px">
+                <div *ngIf="dish.inStock!=0" class="dish-action" fxLayout="row" fxLayoutGap="10px">
+                    <button [disabled]="this.count == dish.inStock" class="dish-order-add mat-elevation-z2"
+                            mat-icon-button
+                            aria-label="Add to basket" (click)="addOrder()">
+                        <mat-icon svgIcon="plus"></mat-icon>
+                    </button>
+                    <button class="dish-order-remove mat-elevation-z2" mat-icon-button
+                            aria-label="Remove from basket"
+                            (click)="removeOrder()">
+                        <mat-icon svgIcon="minus"></mat-icon>
+                    </button>
+                </div>
+                <div class="dish-inStock">
+                    <div *ngIf="dish.inStock!=0; else ELSEinStock">
+                        Available now:
+                        <div>{{ dish.inStock - count }}</div>
+                    </div>
+                    <ng-template #ELSEinStock>
+                        That dish is not available at this moment.
+                    </ng-template>
+                </div>
             </div>
 
             <hr style="width: 100%">

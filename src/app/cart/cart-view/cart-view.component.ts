@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from "../cart.service";
-import {Dish} from "../../shared/models/dish.model";
+import {DishesService, DishMap} from "../../dishes/dishes.service";
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'app-cart-view',
@@ -9,17 +10,27 @@ import {Dish} from "../../shared/models/dish.model";
 })
 export class CartViewComponent implements OnInit {
 
-    basketItems: Array<{ dish: Dish; count: number }>;
+    basketItems: Array<{ key: String; count: number }>;
+    dishMaps!: Observable<DishMap[]>;
+    dishes!: DishMap[];
 
-    constructor(private cartService: CartService) {
+    constructor(private cartService: CartService, private dishesService: DishesService) {
         this.basketItems = this.cartService.getBasketItems();
+        this.dishMaps = this.dishesService.getDishes();
+        this.dishMaps.subscribe(w => {
+            this.dishes = w;
+        });
+
     }
 
     ngOnInit(): void {
     }
 
+    getDish(key: String) {
+        return this.dishes.find(dishMap => dishMap.key == key)!
+    }
 
-    removeFromBasket(dish: Dish){
-        this.cartService.removeFromBasket(dish);
+    removeFromBasket(dishMap: DishMap) {
+        this.cartService.removeFromBasket(dishMap);
     }
 }

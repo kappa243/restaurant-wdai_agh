@@ -21,7 +21,7 @@ export class DishComponent implements OnInit {
 
     ngOnInit(): void {
         this.dish = this.dishMap.dish;
-        let basketItem = this.cartService.getBasketItems().find(dish => JSON.stringify(dish.dish) == JSON.stringify(this.dish));
+        let basketItem = this.cartService.getBasketItems().find(dish => dish.key == this.dishMap.key);
 
         if (basketItem != undefined) {
             this.count = basketItem.count;
@@ -34,7 +34,7 @@ export class DishComponent implements OnInit {
             this.count++;
         }
 
-        this.cartService.addToBasket(this.dish);
+        this.cartService.addToBasket(this.dishMap);
     }
 
 
@@ -42,7 +42,7 @@ export class DishComponent implements OnInit {
         if (this.count > 0) {
             this.count--;
         }
-        this.cartService.removeFromBasket(this.dish);
+        this.cartService.removeFromBasket(this.dishMap);
     }
 
     editDish() {

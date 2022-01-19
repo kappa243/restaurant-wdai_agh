@@ -1,16 +1,16 @@
-<div *ngIf="basketItems.length>0; else empty">
+<div *ngIf="basketItems.length>0 && dishes;  else empty">
     <div class="cart-products" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30px">
 
-        <mat-card [matBadge]="product.count" class="cart-product" *ngFor="let product of basketItems" fxLayout="row"
+        <mat-card [matBadge]="item.count" class="cart-product" *ngFor="let item of basketItems" fxLayout="row"
                   fxLayoutAlign="space-between center">
             <div fxLayout="row" fxLayoutGap="10px">
-                <div class="product-price">{{product.dish.price * product.count | currency:'USD'}} </div>
-                <div class="product-name">{{product.dish.name | uppercase}}</div>
+                <div class="product-price">{{getDish(item.key).dish.price * item.count | currency:'USD'}} </div>
+                <div class="product-name">{{getDish(item.key).dish.name | uppercase}}</div>
             </div>
             <div fxLayout="row">
                 <button class="product-basket-remove mat-elevation-z2" mat-icon-button
                         aria-label="Remove from basket"
-                        (click)="removeFromBasket(product.dish)">
+                        (click)="removeFromBasket(getDish(item.key))">
                     <mat-icon svgIcon="minus"></mat-icon>
                 </button>
             </div>
