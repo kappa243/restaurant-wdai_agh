@@ -1,0 +1,10 @@
+<div fxLayoutAlign="center center">
+    <div class="user-list" *ngIf="userMap | async as userMap; else loading" fxLayout="column" fxLayoutGap="20px">
+        <app-user class="user" *ngFor="let user of userMap" [userMap]="user"></app-user>
+    </div>
+    <ng-template #loading>
+        <div style="margin-top: 50px" fxLayout="row" fxLayoutAlign="center">
+            <mat-spinner></mat-spinner>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,40 @@
+<div fxLayoutAlign="center center">
+    <mat-card class="login-form" >
+        <mat-card-title>
+            Login
+        </mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="formGroup" autocomplete="off" novalidate (ngSubmit)="onSubmit()"
+                  fxLayout="column" fxLayoutGap="8px">
+                <div fxLayout="column" fxLayoutGap="15px">
+                    <div *ngIf="login_failed" class="login-failed">
+                        Login failed! (error in console)
+                    </div>
+                    <div *ngIf="register_success" class="register-success">
+                        Register succeed. Login to your account.
+                    </div>
+                    <mat-form-field class="input-email" fxFlex="100%" fxFlex.lt-sm="100%" appearance="fill"
+                                    [hideRequiredMarker]="true">
+                        <mat-label>Email</mat-label>
+                        <input type="email" id="email" name="email" formControlName="email" matInput>
+                        <mat-error *ngIf="hasError('email', 'required')">Email is required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="input-password" fxFlex="100%" fxFlex.lt-sm="100%" appearance="fill"
+                                    [hideRequiredMarker]="true">
+                        <mat-label>Password</mat-label>
+                        <input type="password" id="password" name="password" formControlName="password" matInput>
+                        <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!formGroup.valid">Log in
+                </button>
+            </form>
+            <div class="register" routerLink="/register">
+                Create your account
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<button *ngIf="(this.authService.isLoggedIn())">click</button>

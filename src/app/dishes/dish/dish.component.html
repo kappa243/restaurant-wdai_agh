@@ -15,7 +15,7 @@
                         {{dish.type}}, {{dish.cuisine | uppercase}} | {{dish.category.toString()}}
                     </mat-card-subtitle>
                 </div>
-                <div class="dish-options">
+                <div *ngIf="this.authService.checkUserRole('admin')" class="dish-options">
                     <button class="mat-elevation-z2" mat-icon-button [matMenuTriggerFor]="menu"
                             aria-label="Dish options">
                         <mat-icon>more_vert</mat-icon>
@@ -37,7 +37,7 @@
                 <div class="dish-price">
                     {{dish.price | currency:'USD'}}
                 </div>
-                <div class="dish-status" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="10px">
+                <div *ngIf="this.authService.isLoggedIn()" class="dish-status" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="10px">
                     <div class="dish-inStock">
                         <div *ngIf="dish.inStock!=0; else ELSEinStock">
                             Available now:

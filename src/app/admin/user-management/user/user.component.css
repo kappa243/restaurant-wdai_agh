@@ -1,0 +1,17 @@
+.user-delete {
+    color: red;
+}
+
+.user-role {
+    height: 100%;
+    width: 100%;
+}
+
+.user-banned {
+    height: 100%;
+    width: 100%;
+}
+
+.user-uid {
+    margin: 5px;
+}

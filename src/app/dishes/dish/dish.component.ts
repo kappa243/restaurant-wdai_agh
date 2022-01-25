@@ -3,6 +3,7 @@ import {Dish} from "../../shared/models/dish.model";
 import {DishesService, DishMap} from "../dishes.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CartService} from "../../cart/cart.service";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
     selector: 'dishes-dish',
@@ -16,7 +17,7 @@ export class DishComponent implements OnInit {
 
     count: number = 0;
 
-    constructor(private dishesService: DishesService, private cartService: CartService, private snackBar: MatSnackBar) {
+    constructor(private dishesService: DishesService, private cartService: CartService, public authService: AuthService, private snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
@@ -45,7 +46,7 @@ export class DishComponent implements OnInit {
         this.cartService.removeFromBasket(this.dishMap);
     }
 
-    editDish() {
+    editDish(){
 
     }
 

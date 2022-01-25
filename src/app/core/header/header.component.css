@@ -6,10 +6,26 @@
     flex: 1 1 auto;
 }
 
+.divider {
+    margin: 0 10px 0 5px;
+}
+
 #home {
     cursor: pointer;
 }
 
 .routing {
     margin: 0 50px 0 50px;
+}
+
+#logout-button {
+    cursor: pointer;
+}
+
+#login-button {
+    cursor: pointer;
+}
+
+#persistence {
+    height: 100%;
 }

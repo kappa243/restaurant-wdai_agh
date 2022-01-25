@@ -50,7 +50,6 @@ export class DishAddComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // this.dialogRef.updateSize('auto')
         this.dishMap.subscribe(dishMap => {
             this.dishes = dishMap.map(dishMap => dishMap.dish)
 
@@ -129,6 +128,8 @@ export class DishAddComponent implements OnInit {
                 imgs: Array.from(this.images),
                 ratings: []
             }
+
+            console.log(dish)
 
             this.dishesService.addDish(dish).then(() => {
                 this.snackBar.open("Dish successfully created", undefined, {

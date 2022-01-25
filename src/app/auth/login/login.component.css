@@ -1,0 +1,19 @@
+.login-form {
+    width: 400px;
+    margin: 50px;
+}
+
+.login-failed {
+    color: red;
+}
+
+.register-success {
+    color: green;
+}
+
+.register {
+    margin-top: 20px;
+    color: #3333d7;
+    cursor: pointer;
+    text-align: center;
+}

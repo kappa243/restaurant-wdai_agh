@@ -14,6 +14,10 @@ mat-drawer {
     padding: 20px;
 }
 
+.drawer-button {
+    width: 100%;
+}
+
 mat-drawer-container {
     position: absolute;
     top:0;

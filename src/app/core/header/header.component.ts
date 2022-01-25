@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
     selector: 'app-header',
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit {
     @Input() drawerButton!: MatDrawer;
     @Input() routing!: { name: string, path: string }[]
 
-    constructor() {
+    constructor(public authService: AuthService) {
     }
 
     ngOnInit(): void {

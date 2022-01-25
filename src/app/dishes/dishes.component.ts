@@ -3,6 +3,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DishAddComponent} from "./dish-add/dish-add.component";
 import {Observable} from "rxjs";
 import {DishesService, DishMap} from "./dishes.service";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
     selector: 'dishes',
@@ -12,7 +13,7 @@ import {DishesService, DishMap} from "./dishes.service";
 export class DishesComponent implements OnInit {
     dishMaps!: Observable<DishMap[]>;
 
-    constructor(private dishesService: DishesService, public dialog: MatDialog) {
+    constructor(private authService: AuthService, private dishesService: DishesService, public dialog: MatDialog) {
     }
 
     ngOnInit(): void {

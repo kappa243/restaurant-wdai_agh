@@ -1,6 +1,14 @@
 <mat-drawer-container [hasBackdrop]="true">
     <mat-drawer #drawer [mode]="'over'">
-        <button mat-flat-button color="primary" *ngFor="let route of routing" routerLink="{{route.path}}" (click)="drawer.close()">{{route.name}}</button>
+        <div fxLayout="column" fxLayoutGap="15px">
+            <button class="drawer-button" mat-flat-button color="primary" routerLink="dishes" (click)="drawer.close()">
+                Dishes
+            </button>
+            <button class="drawer-button" mat-flat-button color="primary"
+                    *ngIf="this.authService.checkUserRole('admin')" routerLink="users-management"
+                    (click)="drawer.close()">Users management
+            </button>
+        </div>
     </mat-drawer>
     <mat-drawer-content>
         <app-header [routing]="routing" [drawerButton]="drawer"></app-header>

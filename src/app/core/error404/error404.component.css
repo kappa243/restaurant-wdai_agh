@@ -1,0 +1,18 @@
+#error404 {
+    font-size: 15rem;
+    font-weight: bolder;
+}
+
+#message {
+    font-size: 2rem;
+}
+
+#container {
+    text-align: center;
+    margin: 30px;
+}
+
+#container > * {
+
+    line-height: 100%;
+}

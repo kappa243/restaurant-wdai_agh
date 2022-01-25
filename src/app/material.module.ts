@@ -17,6 +17,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
     exports: [
@@ -37,7 +38,8 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
         MatToolbarModule,
         MatSidenavModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatCheckboxModule
     ],
     providers: [
         MatDatepickerModule,

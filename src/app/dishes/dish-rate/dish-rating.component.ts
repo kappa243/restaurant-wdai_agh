@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DishesService, DishMap} from "../../dishes.service";
-import {DishRating} from "../../../shared/models/dish.model";
+import {DishesService, DishMap} from "../dishes.service";
+import {DishRating} from "../../shared/models/dish.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
     selector: 'dish-rating',
@@ -20,7 +21,7 @@ export class DishRatingComponent implements OnInit {
     userSelected!: DishRating | undefined;
     dishRatings!: DishRating[] | undefined;
 
-    constructor(private dishesServices: DishesService, private snackBar: MatSnackBar) {
+    constructor(private dishesServices: DishesService, private authSerivce: AuthService, private snackBar: MatSnackBar) {
         let session = window.localStorage.getItem('sessionID');
         this.sessionID = session ? session : '';
     }
@@ -43,22 +44,24 @@ export class DishRatingComponent implements OnInit {
     }
 
     selectStar(star: number) {
-        if (this.userSelected == undefined) {
-            this.userSelected = {user: this.sessionID, rating: 0};
-            this.dishRatings?.push(this.userSelected);
+        if (this.authSerivce.isLoggedIn()) {
+            if (this.userSelected == undefined) {
+                this.userSelected = {user: this.sessionID, rating: 0};
+                this.dishRatings?.push(this.userSelected);
+            }
+
+            this.userSelected.rating = star;
+            this.rate(star);
+
+            this.dishesServices.updateDish(this.dishMap.key, this.dishMap.dish).then(() => {
+                this.snackBar.open("Rating successfully assigned", undefined, {
+                    duration: 3000
+                });
+            })
+
+            // console.log('Value of star', star);
+            // console.log(this.dishRates)
         }
-
-        this.userSelected.rating = star;
-        this.rate(star);
-
-        this.dishesServices.updateDish(this.dishMap.key, this.dishMap.dish).then(() => {
-            this.snackBar.open("Rating successfully assigned", undefined, {
-                duration: 3000
-            });
-        })
-
-        // console.log('Value of star', star);
-        // console.log(this.dishRates)
     }
 
     rate(value: number) {

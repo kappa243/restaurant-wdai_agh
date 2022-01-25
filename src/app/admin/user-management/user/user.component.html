@@ -1,0 +1,29 @@
+<mat-card class="user">
+    <mat-card-title>
+        <div class="user-email">
+            {{user.email}}
+        </div>
+    </mat-card-title>
+    <mat-card-content fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+        <section class="user-role" fxLayout="row" fxLayoutGap="5px">
+            <div *ngFor="let role of rolesTypes" fxLayout="row" fxLayoutAlign="center">
+                <mat-checkbox color="primary" [checked]="hasRole(role)" #checkbox
+                              (change)='changeRole(role, checkbox)'>{{role}}</mat-checkbox>
+            </div>
+        </section>
+
+        <section class="user-banned" fxLayout="row" fxLayoutGap="5px">
+            <mat-checkbox color="primary" [checked]="this.user.banned"
+                          (change)='changeBan()'>Banned state
+            </mat-checkbox>
+        </section>
+        <!--        <button mat-icon-button class="user-delete mat-elevation-z2" aria-label="Delete">-->
+        <!--            <mat-icon svgIcon="delete"></mat-icon>-->
+        <!--        </button>-->
+    </mat-card-content>
+    <mat-card-footer>
+        <div class="user-uid">
+            ID: {{userMap.key}}
+        </div>
+    </mat-card-footer>
+</mat-card>

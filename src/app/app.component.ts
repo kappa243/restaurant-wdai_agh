@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {v4 as uuidv4} from "uuid"
+import {AuthService} from "./auth/auth.service";
 
 @Component({
     selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
 
     localStorage = window.localStorage;
 
-    constructor() {
+    constructor(public authService: AuthService) {
         // temporary session generating
         const sessionID = uuidv4().toString();
         this.localStorage.setItem('sessionID', sessionID)
