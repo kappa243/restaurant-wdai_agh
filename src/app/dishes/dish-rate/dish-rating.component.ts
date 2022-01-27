@@ -3,6 +3,8 @@ import {DishesService, DishMap} from "../dishes.service";
 import {DishRating} from "../../shared/models/dish.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../auth/auth.service";
+import {CartService} from "../../cart/cart.service";
+import {map} from "rxjs";
 
 @Component({
     selector: 'dish-rating',
@@ -12,29 +14,29 @@ import {AuthService} from "../../auth/auth.service";
 export class DishRatingComponent implements OnInit {
     @Input() dishMap!: DishMap;
 
-    sessionID!: string;
 
     stars: number[] = [1, 2, 3, 4, 5];
     selectedStars: boolean[] = [false, false, false, false, false];
+
+    canRate = false;
 
     sessionStorage = window.sessionStorage;
     userSelected!: DishRating | undefined;
     dishRatings!: DishRating[] | undefined;
 
-    constructor(private dishesServices: DishesService, private authSerivce: AuthService, private snackBar: MatSnackBar) {
-        let session = window.localStorage.getItem('sessionID');
-        this.sessionID = session ? session : '';
-    }
+    constructor(private cartService: CartService, private dishesServices: DishesService, private authService: AuthService, private snackBar: MatSnackBar) {}
 
     ngOnInit(): void {
-        // TODO auth rating; for now random session key
+        this.cartService.isBought(this.dishMap.key).pipe(map(val => {
+            this.canRate = (val && !this.authService.getBanState());
+        })).subscribe()
 
         if (this.dishMap.dish.ratings == undefined) {
             this.dishMap.dish.ratings = [];
             this.rate(0);
         }
         this.dishRatings = this.dishMap.dish.ratings;
-        this.userSelected = this.dishRatings.find(rate => rate.user == this.sessionID); //fake user finding
+        this.userSelected = this.dishRatings.find(rate => rate.user == this.authService.getUID()); //fake user finding
 
         if (this.userSelected == undefined) {
             this.rate(this.averageRates());
@@ -44,9 +46,9 @@ export class DishRatingComponent implements OnInit {
     }
 
     selectStar(star: number) {
-        if (this.authSerivce.isLoggedIn()) {
+        if (this.authService.isLoggedIn() && this.canRate) {
             if (this.userSelected == undefined) {
-                this.userSelected = {user: this.sessionID, rating: 0};
+                this.userSelected = {user: this.authService.getUID()!, rating: 0};
                 this.dishRatings?.push(this.userSelected);
             }
 

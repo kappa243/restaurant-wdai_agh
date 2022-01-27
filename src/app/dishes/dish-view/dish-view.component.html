@@ -85,7 +85,7 @@
             <hr style="width: 100%">
 
 
-            <div class="dish-create-comment">
+            <div *ngIf="this.canAccess" class="dish-create-comment">
                 <mat-card>
                     <mat-card-title>
                         Comment dish

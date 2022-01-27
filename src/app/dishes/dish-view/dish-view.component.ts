@@ -5,6 +5,7 @@ import {DishesService, DishMap} from "../dishes.service";
 import {Dish} from "../../shared/models/dish.model";
 import {FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 import {CartService} from "../../cart/cart.service";
+import {AuthService} from "../../auth/auth.service";
 
 
 @Component({
@@ -16,6 +17,8 @@ export class DishViewComponent implements OnInit, OnDestroy {
     id!: string;
     dishMap!: DishMap;
     dish!: Dish;
+
+    canAccess = false;
 
     count: number = 0;
 
@@ -34,7 +37,7 @@ export class DishViewComponent implements OnInit, OnDestroy {
     private id_sub!: Subscription;
     private id_verification_sub!: Subscription;
 
-    constructor(private cartService: CartService, private router: Router, private route: ActivatedRoute, private dishesService: DishesService) {
+    constructor(private authService: AuthService ,private cartService: CartService, private router: Router, private route: ActivatedRoute, private dishesService: DishesService) {
     }
 
     ngOnInit(): void {
@@ -51,6 +54,10 @@ export class DishViewComponent implements OnInit, OnDestroy {
                     if (basketItem != undefined) {
                         this.count = basketItem.count;
                     }
+
+                    this.cartService.isBought(this.dishMap.key).pipe(map(val => {
+                        this.canAccess = (val && !this.authService.getBanState());
+                    })).subscribe()
                 }
             })).subscribe()
         });
@@ -99,7 +106,6 @@ export class DishViewComponent implements OnInit, OnDestroy {
         this.id_sub.unsubscribe();
         this.id_verification_sub.unsubscribe();
     }
-
 
 }
 

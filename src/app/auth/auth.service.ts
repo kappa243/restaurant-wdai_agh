@@ -11,6 +11,7 @@ import {AngularFireDatabase} from "@angular/fire/compat/database";
 })
 export class AuthService {
     fireUser: Observable<firebase.User | null>
+    userMap: UserMap = null!;
     userData: User = null!;
 
     constructor(private router: Router, private angularFireAuth: AngularFireAuth, private db: AngularFireDatabase) {
@@ -20,6 +21,7 @@ export class AuthService {
         this.fireUser.pipe(map(user => {
             this.db.object<User>('/users/' + user?.uid).valueChanges().pipe(map(userObject => {
                 this.userData = userObject!;
+                this.userMap = {key: user?.uid!, user: this.userData};
             })).subscribe()
         })).subscribe()
 
@@ -59,7 +61,7 @@ export class AuthService {
             ))
     }
 
-    getUser(uid: string){
+    getUser(uid: string) {
         return this.db.object('/object/' + uid).valueChanges();
     }
 
@@ -92,8 +94,25 @@ export class AuthService {
         this.updateUser(uid, user);
     }
 
-    updateUser(uid: string, user: User){
+    updateUser(uid: string, user: User) {
         this.db.object<User>("/users/" + uid).update(user);
+    }
+
+    getUID() {
+        if (this.userMap != null) {
+            return this.userMap.key;
+        } else {
+            return null;
+        }
+
+    }
+
+    getBanState(){
+        if(this.userData != null){
+            return this.userData.banned;
+        }else{
+            return true;
+        }
     }
 }
 

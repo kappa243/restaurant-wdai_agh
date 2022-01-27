@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 })
 export class CartViewComponent implements OnInit {
 
-    basketItems: Array<{ key: String; count: number }>;
+    basketItems!: Array<{ key: String; count: number }>;
     dishMaps!: Observable<DishMap[]>;
     dishes!: DishMap[];
 
@@ -32,5 +32,9 @@ export class CartViewComponent implements OnInit {
 
     removeFromBasket(dishMap: DishMap) {
         this.cartService.removeFromBasket(dishMap);
+    }
+
+    buyProducts() {
+        this.cartService.buyProducts();
     }
 }
