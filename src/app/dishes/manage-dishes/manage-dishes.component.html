@@ -3,6 +3,11 @@
          *ngIf="dishMaps | async as dishMaps; else loading">
         <app-dish-manage-view class="dish-item" *ngFor="let dishMap of dishMaps" [dishMap]="dishMap"></app-dish-manage-view>
     </div>
+
+
+    <button class="dish-add mat-elevation-z2" mat-fab aria-label="Add dish" color="primary" (click)="addDish()">
+        <mat-icon svgIcon="plus"></mat-icon>
+    </button>
     <ng-template #loading>
         <div style="margin-top: 50px" fxLayout="row" fxLayoutAlign="center">
             <mat-spinner></mat-spinner>

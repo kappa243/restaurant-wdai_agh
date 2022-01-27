@@ -133,7 +133,7 @@
             </div>
 
 
-            <div class="dish-comments">
+            <div *ngIf="this.comments" class="dish-comments">
                 <mat-card class="comment-item mat-elevation-z2" *ngFor="let comment of comments">
                     <div fxLayout="row" fxLayoutAlign="space-between center">
                         <div class="comment-title">

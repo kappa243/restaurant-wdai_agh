@@ -5,6 +5,11 @@
                 Dishes
             </button>
             <button class="drawer-button" mat-flat-button color="primary"
+                    *ngIf="this.authService.checkUserRole('admin')
+                    || this.authService.checkUserRole('manager')" routerLink="dishes-management"
+                    (click)="drawer.close()">Dishes management
+            </button>
+            <button class="drawer-button" mat-flat-button color="primary"
                     *ngIf="this.authService.checkUserRole('admin')" routerLink="users-management"
                     (click)="drawer.close()">Users management
             </button>

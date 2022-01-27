@@ -6,6 +6,7 @@ import {Dish} from "../../shared/models/dish.model";
 import {FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 import {CartService} from "../../cart/cart.service";
 import {AuthService} from "../../auth/auth.service";
+import {AngularFireDatabase} from "@angular/fire/compat/database";
 
 
 @Component({
@@ -37,7 +38,7 @@ export class DishViewComponent implements OnInit, OnDestroy {
     private id_sub!: Subscription;
     private id_verification_sub!: Subscription;
 
-    constructor(private authService: AuthService ,private cartService: CartService, private router: Router, private route: ActivatedRoute, private dishesService: DishesService) {
+    constructor(private authService: AuthService ,private cartService: CartService, private router: Router, private route: ActivatedRoute, private dishesService: DishesService, private db: AngularFireDatabase) {
     }
 
     ngOnInit(): void {
@@ -57,6 +58,10 @@ export class DishViewComponent implements OnInit, OnDestroy {
 
                     this.cartService.isBought(this.dishMap.key).pipe(map(val => {
                         this.canAccess = (val && !this.authService.getBanState());
+                    })).subscribe()
+
+                    this.db.list<DishComment>('/comments/' + this.dishMap.key).valueChanges().pipe(map(val => {
+                        this.comments = val;
                     })).subscribe()
                 }
             })).subscribe()
@@ -82,6 +87,9 @@ export class DishViewComponent implements OnInit, OnDestroy {
             // this.formGroup.reset({title: '', nick: '', purchase_date: '', text: ''});
             formDirective.resetForm();
             this.formGroup.reset()
+
+
+            this.db.list('/comments/' + this.dishMap.key).push(comment);
             // TODO comments to database after authentication
         }
     }

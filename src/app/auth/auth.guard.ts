@@ -63,10 +63,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
                     }
                 }
                 console.log("Did not found required role. Redirecting to 404.")
-                this.router.navigate(['404']);
+                this.router.navigate(['']);
                 return false;
             }
-            this.router.navigate(['404']);
+            this.router.navigate(['']);
             return false;
         }
     }

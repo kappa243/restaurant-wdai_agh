@@ -1,6 +1,8 @@
+
 <mat-form-field id="persist"
                 [hideRequiredMarker]="true">
-    <mat-label>Persistence</mat-label>
+    <mat-label>
+        <mat-icon id="bug" svgIcon="bug"></mat-icon>Persistence</mat-label>
     <mat-select [(value)]="persistence" (valueChange)="changePersistance()">
         <mat-option value="local">Local</mat-option>
         <mat-option value="session">Session</mat-option>

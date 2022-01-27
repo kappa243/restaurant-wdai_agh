@@ -1,16 +1,16 @@
 <mat-toolbar class="header" color="primary">
     <button mat-icon-button class="menu-button" aria-label="Menu" (click)="openSideNav()" fxShow="false"
-            fxShow.lt-sm="true">
+            fxShow.lt-lg="true">
         <mat-icon>menu</mat-icon>
     </button>
     <span id="home" routerLink="">Restaurant</span>
 
-    <div class="routing" fxShow="true" fxShow.lt-sm="false" fxLayout="row" fxLayoutGap="10px">
+    <div class="routing" fxShow="true" fxShow.lt-lg="false" fxLayout="row" fxLayoutGap="10px">
         <button mat-flat-button routerLink="dishes">Dishes</button>
 
-<!--        *ngIf="this.authService.checkUserRole('manager')-->
-<!--        || this.authService.checkUserRole('admin')"-->
-        <button mat-flat-button
+
+        <button *ngIf="this.authService.checkUserRole('manager')
+        || this.authService.checkUserRole('admin')" mat-flat-button
                 routerLink="dishes-management">
             Dishes management
         </button>
