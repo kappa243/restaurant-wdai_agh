@@ -9,7 +9,6 @@ import {RegisterComponent} from "./auth/register/register.component";
 import {AuthGuard} from "./auth/auth.guard";
 import {Error404Component} from "./core/error404/error404.component";
 import {UserManagementComponent} from "./admin/user-management/user-management.component";
-import {Roles} from "./auth/user";
 import {ManageDishesComponent} from "./dishes/manage-dishes/manage-dishes.component";
 
 
@@ -51,14 +50,18 @@ const routes: Routes = [
     },
     {
         path: 'dishes-management',
-        component: ManageDishesComponent
+        component: ManageDishesComponent,
+        canActivate: [AuthGuard],
+        data: {
+            userRoles: ['admin', 'manager']
+        }
     },
     {
         path: 'users-management',
         component: UserManagementComponent,
         canActivate: [AuthGuard],
         data: {
-            userRoles: [Roles.ADMIN]
+            userRoles: ['admin']
         }
     },
     {

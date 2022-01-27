@@ -56,10 +56,10 @@ export class DishEditComponent implements OnInit {
 
     ngOnInit(): void {
 
-        for(let img of this.dish.imgs){
+        for (let img of this.dish.imgs) {
             this.images.add(img);
         }
-        for(let ing of this.dish.ingredients){
+        for (let ing of this.dish.ingredients) {
             this.ingredients.add(ing);
         }
 
@@ -87,7 +87,6 @@ export class DishEditComponent implements OnInit {
                 map(cuisine => (cuisine ? this.filterString(<string>cuisine, this.cuisines) : this.cuisines))
             )
 
-            console.log("here")
             this.categories = Object.values(DishCategory);
         })
     }

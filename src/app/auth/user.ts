@@ -1,11 +1,11 @@
 export interface User {
     email: string;
     banned: boolean;
-    roles: string[];
+    roles: Roles;
 }
 
-export enum Roles {
-    ADMIN = 'admin',
-    MANAGER = 'manager',
-    CLIENT = 'client'
+export interface Roles {
+    admin: boolean,
+    manager: boolean,
+    client: boolean
 }

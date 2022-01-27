@@ -6,9 +6,17 @@
     </mat-card-title>
     <mat-card-content fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
         <section class="user-role" fxLayout="row" fxLayoutGap="5px">
-            <div *ngFor="let role of rolesTypes" fxLayout="row" fxLayoutAlign="center">
-                <mat-checkbox color="primary" [checked]="hasRole(role)" #checkbox
-                              (change)='changeRole(role, checkbox)'>{{role}}</mat-checkbox>
+            <div fxLayout="row" fxLayoutAlign="center">
+                <mat-checkbox color="primary" [checked]="hasRole('client')" #checkbox1
+                              (change)='changeRole("client", checkbox1)'>client</mat-checkbox>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center">
+                <mat-checkbox color="primary" [checked]="hasRole('manager')" #checkbox2
+                              (change)='changeRole("manager", checkbox2)'>manager</mat-checkbox>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center">
+                <mat-checkbox color="primary" [checked]="hasRole('admin')" #checkbox3
+                              (change)='changeRole("admin", checkbox3)'>admin</mat-checkbox>
             </div>
         </section>
 

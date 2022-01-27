@@ -61,7 +61,7 @@ export class CartService {
     }
 
     buyProducts() {
-        if (this.basketItems.length > 0) {
+        if (this.basketItems.length > 0 && this.authService.isLoggedIn()) {
             this.db.list('/transactions/' + this.authService.getUID()).push(this.basketItems);
 
             for (let item of this.basketItems) {

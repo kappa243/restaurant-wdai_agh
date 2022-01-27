@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AuthService, UserMap} from "../../../auth/auth.service";
-import {Roles, User} from "../../../auth/user";
-import {FormGroup} from "@angular/forms";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {User} from "../../../auth/user";
 import {MatCheckbox} from "@angular/material/checkbox";
 
 @Component({
@@ -14,10 +12,8 @@ export class UserComponent implements OnInit {
     @Input() userMap!: UserMap;
     user!: User;
 
-    roles!: FormGroup;
-    rolesTypes = Object.keys(Roles);
 
-    constructor(private authService: AuthService, private snackBar: MatSnackBar) {
+    constructor(private authService: AuthService) {
     }
 
     ngOnInit(): void {
@@ -25,29 +21,54 @@ export class UserComponent implements OnInit {
     }
 
     hasRole(role: string) {
-        return this.user.roles.find(r => r == role.toLowerCase()) != null;
+        switch (role) {
+            case 'admin':
+                return this.user.roles.admin;
+            case 'manager':
+                return this.user.roles.manager;
+            case 'client':
+                return this.user.roles.client;
+            default:
+                return false
+        }
     }
 
     addRole(role: string) {
         role = role.toLowerCase();
         if (!this.hasRole(role)) {
-            this.user.roles.push(role);
+            switch (role) {
+                case 'admin':
+                    this.user.roles.admin = true;
+                    break;
+                case 'manager':
+                    this.user.roles.manager = true;
+                    break;
+                case 'client':
+                    this.user.roles.client = true;
+                    break;
+                default:
+                    return;
+            }
             this.authService.updateUser(this.userMap.key, this.user);
         }
     }
 
-    removeRole(role: string, checkbox: MatCheckbox) {
+    removeRole(role: string) {
         role = role.toLowerCase();
         if (this.hasRole(role)) {
-            if (this.user.roles.length == 1) {
-                this.snackBar.open("User must have at least 1 role!", undefined, {
-                    duration: 2000
-                });
-                checkbox.checked = true;
-                return;
+            switch (role) {
+                case 'admin':
+                    this.user.roles.admin = false;
+                    break;
+                case 'manager':
+                    this.user.roles.manager = false;
+                    break;
+                case 'client':
+                    this.user.roles.client = false;
+                    break;
+                default:
+                    return;
             }
-            let index = this.user.roles.findIndex(r => r == role);
-            this.user.roles.splice(index, 1);
             this.authService.updateUser(this.userMap.key, this.user);
         }
     }
@@ -56,7 +77,7 @@ export class UserComponent implements OnInit {
         if (checkbox.checked) {
             this.addRole(role)
         } else {
-            this.removeRole(role, checkbox)
+            this.removeRole(role)
         }
     }
 

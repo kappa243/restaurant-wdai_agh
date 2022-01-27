@@ -32,7 +32,9 @@ export class DishesService {
     }
 
     removeDish(key: string) {
-        return this.dataRef.remove(key);
+        return this.dataRef.remove(key).then(() => {
+            return this.db.object('/comments/' + key).remove();
+        });
     }
 }
 

@@ -3,7 +3,7 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {map, Observable} from "rxjs";
 import firebase from "firebase/compat";
 import {Router} from "@angular/router";
-import {User} from "./user";
+import {Roles, User} from "./user";
 import {AngularFireDatabase} from "@angular/fire/compat/database";
 
 @Injectable({
@@ -19,10 +19,15 @@ export class AuthService {
 
 
         this.fireUser.pipe(map(user => {
-            this.db.object<User>('/users/' + user?.uid).valueChanges().pipe(map(userObject => {
-                this.userData = userObject!;
-                this.userMap = {key: user?.uid!, user: this.userData};
-            })).subscribe()
+            if (user != null) {
+                this.db.object<User>('/users/' + user?.uid).valueChanges().pipe(map(userObject => {
+                    this.userData = userObject!;
+                    this.userMap = {key: user?.uid!, user: this.userData};
+                })).subscribe()
+            }else{
+                this.userData = null!;
+                this.userMap = null!;
+            }
         })).subscribe()
 
         this.angularFireAuth.setPersistence('session');
@@ -30,17 +35,22 @@ export class AuthService {
 
     signUp(email: string, password: string, role: string) {
         this.angularFireAuth.createUserWithEmailAndPassword(email, password).then(res => {
+            let roles: Roles;
+            if (role == 'admin') {
+                roles = {admin: true, manager: false, client: false}
+            } else {
+                roles = {admin: false, manager: false, client: true}
+            }
+
             let user: User = {
                 email: res.user?.email!,
                 banned: false,
-                roles: [role]
+                roles: roles
             }
 
             this.db.object('/users/' + res.user?.uid).set(user);
 
-            this.angularFireAuth.signOut().then(() => {
-                this.router.navigate(['/login'], {queryParams: {register_success: true}})
-            })
+            this.router.navigate(['/']);
         }).catch(err => {
             this.router.navigate(['register'], {queryParams: {register_failed: err}})
         })
@@ -79,7 +89,16 @@ export class AuthService {
 
     checkUserRole(role: string) {
         if (this.userData != null) {
-            return this.userData.roles.find(res => res == role) != null
+            switch (role) {
+                case 'admin':
+                    return this.userData.roles.admin;
+                case 'manager':
+                    return this.userData.roles.manager;
+                case 'client':
+                    return this.userData.roles.client;
+                default:
+                    return false
+            }
         } else {
             return false
         }
@@ -107,10 +126,10 @@ export class AuthService {
 
     }
 
-    getBanState(){
-        if(this.userData != null){
+    getBanState() {
+        if (this.userData != null) {
             return this.userData.banned;
-        }else{
+        } else {
             return true;
         }
     }
