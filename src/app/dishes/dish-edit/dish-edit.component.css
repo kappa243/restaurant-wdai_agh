@@ -1,0 +1,36 @@
+.dialog {
+    max-width: 1000px;
+    width: 100%;
+    height: 100%;
+}
+
+.dialog-actions {
+    margin-bottom: 1px;
+}
+
+.content-left, .content-right {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+input.number-arrow-disable::-webkit-outer-spin-button,
+input.number-arrow-disable::-webkit-inner-spin-button,
+input.number-arrow-disable {
+    -moz-appearance: textfield;
+}
+
+.price-right-align {
+    text-align: right;
+}
+
+
+
+
+.loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

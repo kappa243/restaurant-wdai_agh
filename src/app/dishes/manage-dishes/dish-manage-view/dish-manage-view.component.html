@@ -1,0 +1,37 @@
+<mat-card class="dish-item">
+    <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
+        <div class="dish-title">
+            {{dish.name}}
+        </div>
+        <button class="mat-elevation-z2" mat-icon-button [matMenuTriggerFor]="menu"
+                aria-label="Dish options">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button class="dish-edit" mat-menu-item aria-label="Edit dish" (click)="editDish(dishMap)">
+                <mat-icon svgIcon="pencil"></mat-icon>
+                <span>Edit dish</span>
+            </button>
+            <button class="dish-delete" mat-menu-item aria-label="Delete dish" (click)="deleteDish()">
+                <mat-icon svgIcon="delete"></mat-icon>
+                <span>Delete dish</span>
+            </button>
+        </mat-menu>
+    </mat-card-title>
+    <mat-card-subtitle class="dish-types">
+        {{dish.type}}, {{dish.cuisine}} | {{dish.category.toString()}}
+    </mat-card-subtitle>
+    <mat-card-content>
+        <div fxLayout="row" fxLayoutGap="10px">
+            <div class="dish-info" fxLayout="column" fxLayoutGap="5px">
+                <div class="dish-info-title">Dish information</div>
+                <div class="dish-count">
+                    <b>In stock:</b> {{dish.inStock}}
+                </div>
+                <div class="dish-price">
+                    <b>Price:</b> {{dish.price | currency: 'USD'}}
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
